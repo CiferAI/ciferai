@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+package main;
+
+message registerArgs {
+    string ip = 1;
+    string port = 2;
+    string cid = 3;
+    string pub_key = 4;  // Add pub_key field
+}
+
+message registerOut {
+    bool connectedClient = 1; // Used to indicate client connection status
+    int32 round = 2;          // Used to indicate the current round number
+}
+
+message sampleSize {
+    int32 size = 1;          // Sample size
+}
+
+message accuracy {
+    float acc = 1;          // Model accuracy
+}
+
+message weightList {
+    repeated float weight = 1; // List of model weights
+}
+
+message currentRound {
+    int32 round = 1;         // Current round number
+}
+
+message void {
+}
+
+// Use byte data to send large data in chunks
+message ChunkData {
+    bytes data = 1;          
+}
+
+// Use encrypted data
+message EncryptedData {
+    bytes encrypted_data = 1; // Encrypted data
+}
+
+// Send message back when all data is received
+message Response {
+    string message = 1;      
+}
+
+message registerResponse {
+    bool connectedClient = 1;
+    int32 round = 2;
+}
+
+// Add message for registering encrypted data
+message EncryptionArgs {
+    EncryptedData encryptedData = 1; // Encrypted data
+}
+
+service FederatedService {
+    // Streaming RPC for sending large data from client to server
+    rpc sendChunk(stream ChunkData) returns (Response);
+
+    // RPC for registering client
+    rpc clientRegister(registerArgs) returns (registerOut);
+
+    // RPC to start learning and return weights
+    rpc startLearning(void) returns (weightList);
+
+    // RPC to receive sample size from the server
+    rpc getSampleSize(void) returns (sampleSize);
+
+    // RPC for model validation
+    rpc modelValidation(weightList) returns (accuracy);
+
+    // RPC to stop client
+    rpc killClient(void) returns (void);
+
+    // RPC to send current round
+    rpc sendRound(currentRound) returns (void);
+
+    // RPC for sending encrypted data from client to server
+    rpc sendEncryptedData(EncryptionArgs) returns (Response);
+
+    // RPC for receiving encrypted data from server
+    rpc receiveEncryptedData(EncryptionArgs) returns (Response);
+}

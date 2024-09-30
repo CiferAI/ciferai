@@ -1,0 +1,5 @@
+{
+    "server_address": "localhost:8080",
+    "client_ip": "[::]",
+    "port_offset": 30000
+}
