@@ -1,0 +1,497 @@
+Metadata-Version: 2.1
+Name: cifer
+Version: 0.1.18
+Summary: Federated Learning and Fully Homomorphic Encryption
+Home-page: https://www.cifer.ai
+Author: cifer.ai
+Author-email: 
+License: Apache License 2.0
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+Requires-Dist: aiosignal==1.3.1
+Requires-Dist: anyio==4.3.0
+Requires-Dist: argon2-cffi==23.1.0
+Requires-Dist: argon2-cffi-bindings==21.2.0
+Requires-Dist: arrow==1.3.0
+Requires-Dist: tensorflow-macos==2.13.0
+Requires-Dist: tensorflow-metal
+Requires-Dist: asttokens==2.4.1
+Requires-Dist: async-lru==2.0.4
+Requires-Dist: attrs==23.2.0
+Requires-Dist: Babel==2.15.0
+Requires-Dist: beautifulsoup4==4.12.3
+Requires-Dist: bleach==6.1.0
+Requires-Dist: certifi==2023.11.17
+Requires-Dist: cffi==1.16.0
+Requires-Dist: charset-normalizer==3.3.2
+Requires-Dist: click==8.1.7
+Requires-Dist: colorama==0.4.6
+Requires-Dist: comm==0.2.2
+Requires-Dist: contourpy
+Requires-Dist: cryptography==42.0.7
+Requires-Dist: cycler==0.12.1
+Requires-Dist: debugpy==1.8.1
+Requires-Dist: decorator==5.1.1
+Requires-Dist: defusedxml==0.7.1
+Requires-Dist: exceptiongroup==1.2.1
+Requires-Dist: executing==2.0.1
+Requires-Dist: fastjsonschema==2.19.1
+Requires-Dist: filelock==3.13.1
+Requires-Dist: fonttools==4.47.2
+Requires-Dist: fqdn==1.5.1
+Requires-Dist: frozenlist==1.4.1
+Requires-Dist: fsspec
+Requires-Dist: transformers==4.44.2
+Requires-Dist: scikit-learn
+Requires-Dist: opencv-python-headless
+Requires-Dist: grpcio==1.66.1
+Requires-Dist: imutils
+Requires-Dist: keras
+Requires-Dist: h11==0.14.0
+Requires-Dist: httpcore==1.0.5
+Requires-Dist: httpx==0.27.0
+Requires-Dist: idna==3.6
+Requires-Dist: ipykernel
+Requires-Dist: ipython
+Requires-Dist: isoduration==20.11.0
+Requires-Dist: iterators==0.0.2
+Requires-Dist: jedi==0.19.1
+Requires-Dist: Jinja2==3.1.3
+Requires-Dist: json5==0.9.25
+Requires-Dist: jsonpointer==2.4
+Requires-Dist: jsonschema==4.21.1
+Requires-Dist: jsonschema-specifications==2023.12.1
+Requires-Dist: jupyter-lsp
+Requires-Dist: jupyter_client
+Requires-Dist: jupyter_core
+Requires-Dist: jupyter_server
+Requires-Dist: jupyter_server_terminals
+Requires-Dist: jupyterlab
+Requires-Dist: jupyterlab_pygments
+Requires-Dist: jupyterlab_server
+Requires-Dist: kiwisolver==1.4.5
+Requires-Dist: markdown-it-py
+Requires-Dist: MarkupSafe==2.1.4
+Requires-Dist: matplotlib
+Requires-Dist: matplotlib-inline==0.1.7
+Requires-Dist: mdurl==0.1.2
+Requires-Dist: mistune==3.0.2
+Requires-Dist: mpmath==1.3.0
+Requires-Dist: msgpack==1.0.7
+Requires-Dist: nbclient==0.10.0
+Requires-Dist: nbconvert==7.16.4
+Requires-Dist: nbformat==5.10.4
+Requires-Dist: nest-asyncio==1.6.0
+Requires-Dist: networkx
+Requires-Dist: notebook_shim==0.2.4
+Requires-Dist: numpy
+Requires-Dist: overrides==7.7.0
+Requires-Dist: packaging==23.2
+Requires-Dist: pandas
+Requires-Dist: pandocfilters==1.5.1
+Requires-Dist: parso==0.8.4
+Requires-Dist: pexpect==4.9.0
+Requires-Dist: pillow==10.2.0
+Requires-Dist: protobuf
+Requires-Dist: platformdirs==4.2.2
+Requires-Dist: prometheus_client==0.20.0
+Requires-Dist: prompt-toolkit==3.0.43
+Requires-Dist: psutil==5.9.8
+Requires-Dist: ptyprocess==0.7.0
+Requires-Dist: pure-eval==0.2.2
+Requires-Dist: py-markdown-table==0.4.0
+Requires-Dist: pyarrow
+Requires-Dist: pybind11-global==2.11.1
+Requires-Dist: pycparser==2.21
+Requires-Dist: pycryptodome==3.20.0
+Requires-Dist: Pygments==2.18.0
+Requires-Dist: pyparsing==3.1.1
+Requires-Dist: python-dateutil==2.8.2
+Requires-Dist: python-json-logger==2.0.7
+Requires-Dist: pytz==2023.3.post1
+Requires-Dist: PyYAML
+Requires-Dist: referencing==0.32.1
+Requires-Dist: requests==2.31.0
+Requires-Dist: rfc3339-validator==0.1.4
+Requires-Dist: rfc3986-validator==0.1.1
+Requires-Dist: rich==13.7.1
+Requires-Dist: rpds-py==0.17.1
+Requires-Dist: Send2Trash==1.8.3
+Requires-Dist: shellingham==1.5.4
+Requires-Dist: six==1.16.0
+Requires-Dist: sniffio==1.3.1
+Requires-Dist: soupsieve==2.5
+Requires-Dist: stack-data==0.6.3
+Requires-Dist: sympy==1.12
+Requires-Dist: terminado==0.18.1
+Requires-Dist: tinycss2==1.3.0
+Requires-Dist: tomli==2.0.1
+Requires-Dist: torch
+Requires-Dist: torchvision
+Requires-Dist: tornado
+Requires-Dist: tqdm
+Requires-Dist: traitlets==5.14.3
+Requires-Dist: typer==0.9.4
+Requires-Dist: types-python-dateutil==2.9.0.20240316
+Requires-Dist: typing_extensions
+Requires-Dist: tzdata==2023.4
+Requires-Dist: uri-template==1.3.0
+Requires-Dist: urllib3==2.1.0
+Requires-Dist: wcwidth==0.2.13
+Requires-Dist: webcolors==1.13
+Requires-Dist: webencodings==0.5.1
+Requires-Dist: websocket-client==1.8.0
+
+<p align="left">
+  <a href="https://cifer.ai/">
+    <img src="https://cifer.ai/assets/themes/cifer/images/logo/ciferlogo.png" width="240" alt="Cifer Website" />
+  </a>
+</p>
+
+Cifer is a **Privacy-Preserving Machine Learning (PPML) framework** offers several methods for secure, private, collaborative machine learning **“Federated Learning”** and **“Fully Homomorphic Encryption”**
+
+[![GitHub license](https://img.shields.io/github/license/CiferAI/ciferai)](https://github.com/CiferAI/ciferai/blob/main/LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/CiferAI/ciferai/blob/main/CONTRIBUTING.md)
+[![Downloads](https://static.pepy.tech/badge/cifer)](https://pepy.tech/project/cifer)
+
+[Website](https://cifer.ai) | 
+[Docs](https://cifer.ai/documentation)
+
+<br>
+
+## Table of content
+1. <a href="#introduction">Introduction</a>
+2. <a href="#installation">Installation</a>
+3. <a href="#basic-usage-examples">Basic Usage Examples</a><br>
+3.1 <a href="#basic-usage-examples-fedlearn">FedLearn</a><br>
+3.2 <a href="#basic-usage-examples-fhe">FHE</a>
+
+<br>
+
+# Introduction
+
+Cifer is a Privacy-Preserving Machine Learning (PPML) framework designed to revolutionize the way organizations approach secure, private, and collaborative machine learning. In an era where data privacy and security are paramount, Cifer offers a comprehensive solution that combines advanced technologies to enable privacy-conscious AI development and deployment.
+
+## Core Modules
+1. **Federated Learning (FedLearn):** Cifer's FedLearn module allows for decentralized machine learning, enabling multiple parties to collaborate on model training without sharing raw data.
+2. **Fully Homomorphic Encryption (HomoCryption):** Our FHE framework permits computations on encrypted data, ensuring end-to-end privacy throughout the machine learning process.
+
+## Key Features
+
+1. **Flexible Architecture:** Cifer adapts to your needs, supporting both decentralized and centralized federated learning configurations.
+
+2. **Enhanced Security and Privacy:** Leveraging advanced cryptographic techniques and secure communication protocols, Cifer provides robust protection against various privacy and security threats.
+
+3. **Broad Integration:** Seamlessly integrates with popular machine learning tools and frameworks, including PyTorch, TensorFlow, scikit-learn, NumPy, JAX, Cuda, Hugging Face's Transformer; ensuring easy adoption across different environments.
+
+4. **No-Code Configuration:** Simplify your setup with our intuitive no-code platform, making privacy-preserving machine learning accessible to a wider audience.
+
+## Why Cifer Stands Out
+Cifer offers a revolutionary approach to **Privacy-Preserving Machine Learning (PPML)** by combining powerful federated learning capabilities with robust encryption, ensuring privacy, security, and flexibility. Here are the key reasons why Cifer sets itself apart from other federated learning frameworks:
+
+### 1. Customized Network Design: Decentralized (dFL) and Centralized (cFL) Options
+Cifer’s FedLearn framework provides the flexibility to choose between Decentralized Federated Learning (dFL) and Centralized Federated Learning (cFL):
+
+- **Decentralized Federated Learning (dFL):** Powered by Cifer’s proprietary blockchain and Layer-1 infrastructure, dFL ensures a robust, resilient system through its Byzantine Robust Consensus algorithm, even if some nodes are compromised or malicious. This fully decentralized approach is ideal for distributed environments where privacy and data ownership are paramount.
+
+- **Centralized Federated Learning (cFL):** For organizations that prefer more control, such as trusted collaborations among known partners, cFL offers a centralized model that provides oversight and management flexibility. This centralized option is tailored for environments that require higher levels of governance.
+
+### 2. Enhanced Security and Efficient Communication Protocol
+Most federated learning frameworks on the market rely on Peer-to-Peer (P2P) protocols, which are vulnerable to security threats like man-in-the-middle attacks, data interception, and inefficiencies in communication.
+
+Cifer uses the gRPC communication protocol, which leverages HTTP/2 for multiplexing, bidirectional streaming, and header compression, resulting in faster, more secure communication. By utilizing Protocol Buffers for serialization, Cifer ensures smaller message sizes, faster processing, and enhanced reliability. The built-in encryption and secure communication channels protect data exchanges from unauthorized access and tampering, making Cifer a more secure and efficient solution compared to P2P-based frameworks.
+
+### 3. No-Code Configuration Platform
+Cifer simplifies the complexity of setting up federated learning with its no-code configuration platform. Unlike other frameworks that require manual coding and intricate setups, Cifer provides an intuitive browser-based user interface that allows users to design, configure, and deploy federated learning systems without writing any code. This innovative approach lowers the barrier for organizations to adopt federated learning while ensuring flexibility and scalability.
+
+### 4. FedLearn Combined with Fully Homomorphic Encryption (FHE)
+Cifer uniquely combines FedLearn with Fully Homomorphic Encryption (FHE), enabling computations on encrypted data throughout the entire training process. This means that sensitive data never needs to be decrypted, providing end-to-end encryption for complete privacy. With the integration of FHE, organizations can train machine learning models on sensitive data without ever exposing it, ensuring that privacy and compliance standards are met, even when working in a collaborative environment.
+
+<br><br>
+
+# Installation
+
+Pip The preferred way to install Cifer is through PyPI:
+```
+pip install cifer
+```
+
+<br>
+
+To upgrade Cifer to the latest version, use:
+```
+pip install --upgrade cifer
+```
+
+> ### Note:
+> - **For macOS:** You can run these commands in the Terminal application.
+> - **For Windows:** Use Command Prompt or PowerShell.
+> - **For Linux:** Use your preferred terminal emulator.
+> - **For Google Colab:** Run these commands in a code cell, prefixed with an exclamation mark (e.g., !pip install cifer).
+> - **For Jupyter Notebook:** You can use either a code cell with an exclamation mark or the %pip magic command (e.g., %pip install cifer).
+
+<br>
+
+## Docker
+You can get the Cifer docker image by pulling the latest version:
+```
+docker pull ciferai/cifer:latest
+```
+<br>
+
+To use a specific version of Cifer, replace latest with the desired version number, for example:
+```
+docker pull ciferai/cifer:v1.0.0
+```
+
+<br><br>
+
+# What's Included in pip install cifer
+When you install Cifer using pip, you get access to the following components and features:
+
+### Core Modules
+- **FedLearn:** Our federated learning implementation, allowing for collaborative model training while keeping data decentralized.
+- **HomoCryption:** Fully Homomorphic Encryption module for performing computations on encrypted data.
+
+### Integrations
+Cifer seamlessly integrates with popular machine learning frameworks:
+TensorFlow, Pytorch, scikit-learn, Numpy, Cuda, JAX, Hugging Face’s Transformer 
+
+### Utilities
+-	Data preprocessing tools
+-	Privacy-preserving metrics calculation
+-	Secure aggregation algorithms
+
+### Cryptographic Libraries
+-	Integration with state-of-the-art homomorphic encryption libraries
+
+### Communication Layer
+-	gRPC-based secure communication protocols for federated learning
+
+### Example Notebooks
+-	Jupyter notebooks demonstrating Cifer's capabilities in various scenarios
+
+### Command-line Interface (CLI)
+- A user-friendly CLI for managing Cifer experiments and configurations
+
+## Optional Dependencies
+Some features may require additional dependencies. You can install them using:
+
+```
+pip install cifer[extra]
+```
+Where extra can be:<br>
+`viz`: For visualization tools<br>
+`gpu`: For GPU acceleration support<br>
+`all`: To install all optional dependencies
+
+<br><br>
+
+# Importing Cifer
+After installing Cifer, you can import its modules in your Python scripts or interactive environments. The two main modules, FedLearn and FHE (Fully Homomorphic Encryption), can be imported as follows:
+
+<img src="https://cifer.ai/assets/themes/cifer/images/icon/icon-python.png" width="16" alt="Python" /> &nbsp;Python
+
+```
+from cifer import fedlearn as fl
+from cifer import homocryption as fhe
+```
+
+<br><br>
+
+# Basic Usage Examples
+Here are some quick examples to get you started:
+
+## Basic Usage Examples: FedLearn
+```
+# Import the necessary modules from the Cifer framework
+from cifer import fedlearn as fl
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
+import torch
+import os
+
+# Define paths to local data and model
+local_data_path = "/path/to/local/data"
+local_model_path = "/path/to/local/model"
+
+# Option to load a pre-trained Hugging Face model
+model_name = "distilbert-base-uncased"
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForSequenceClassification.from_pretrained(model_name)
+
+# Alternatively, clone a model repository from GitHub (if necessary)
+os.system("git clone https://github.com/your-repo/your-model-repo.git")
+
+# Initialize the federated learning server using Cifer's FedLearn
+server = fl.Server()
+
+# Define a federated learning strategy
+strategy = fl.strategy.FedAvg(
+    # Custom data and model paths for local storage and Hugging Face model usage
+    data_path=local_data_path,
+    model_path=local_model_path,
+    model_fn=lambda: model,  # Hugging Face model used as the base model
+)
+
+# Start the federated learning process
+if __name__ == "__main__":
+    server.run(strategy)
+```
+
+### Key Adjustments: FedLearn
+
+#### 1. Importing Cifer:
+The code begins by importing Cifer’s federated learning module: `from cifer import fedlearn as fl`, which allows you to use the FedLearn framework in your federated learning setup.
+
+
+#### 2. Defining Datasets:
+The dataset is stored locally, and the path to the dataset is defined using `local_data_path`. Ensure your dataset is prepared and accessible in the specified directory on your local machine. This local path will be used to load data for federated learning:
+```
+local_data_path = "/path/to/local/data"
+```
+
+#### 3. Defining Models:
+You can integrate models into Cifer’s FedLearn in three different ways, depending on your requirements:
+
+<br>
+
+**3.1 Local Model:**<br>
+If you have a pre-trained model stored locally, you can specify the local path to the model and use it for training:
+```
+local_model_path = "/path/to/local/model"
+```
+<br>
+
+**3.2 Git Clone:**<br>
+If your model is hosted on GitHub, you can clone the repository directly into your environment using the `os.system("git clone ...")` command:
+```
+os.system("git clone https://github.com/your-repo/your-model-repo.git")
+```
+<br>
+
+**3.3 Hugging Face Model:**<br>
+You can integrate a pre-trained model from Hugging Face’s `transformers` library. For instance, you can load a BERT-based model like this:
+```
+model_name = "distilbert-base-uncased"
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForSequenceClassification.from_pretrained(model_name)
+```
+
+<br>
+
+## Basic Usage Examples: FHE
+
+```
+# Import Cifer's HomoCryption module for fully homomorphic encryption
+from cifer import homocryption as hc
+
+# Generate keys: Public Key, Private Key, and Relinearization Key (Relin Key)
+public_key, private_key, relin_key = hc.generate_keys()
+
+# Example data to be encrypted
+data = [42, 123, 256]
+
+# Encrypt the data using the Public Key
+encrypted_data = [hc.encrypt(public_key, value) for value in data]
+
+# Perform computations on encrypted data
+# For example, adding encrypted values
+encrypted_result = hc.add(encrypted_data[0], encrypted_data[1])
+
+# Apply relinearization to reduce noise in the ciphertext
+relinearized_result = hc.relinearize(encrypted_result, relin_key)
+
+# Decrypt the result using the Private Key
+decrypted_result = hc.decrypt(private_key, relinearized_result)
+
+# Output the result
+print("Decrypted result of encrypted addition:", decrypted_result)
+```
+
+<br>
+
+### How It Works: FHE
+
+#### Key Generation:
+First, we generate the necessary keys for homomorphic encryption using `hc.generate_keys()`. This provides the Public Key (used for encrypting data), Private Key (for decrypting results), and Relinearization Key (used to reduce noise during operations on encrypted data).
+
+#### Encrypting Data:
+Data is encrypted using the Public Key with `hc.encrypt()`. In this example, a simple array of numbers is encrypted for further computations.
+
+#### Performing Encrypted Computation:
+Fully homomorphic encryption allows computations to be performed directly on encrypted data. Here, we add two encrypted values with `hc.add()` without decrypting them, maintaining privacy throughout the operation.
+
+#### Relinearization:
+Relinearization helps manage noise introduced by homomorphic operations, which is done with the Relin Key using `hc.relinearize()`.
+
+#### Decryption:
+After the computations are complete, the Private Key is used to decrypt the result with `hc.decrypt()`.
+
+<br>
+
+---
+<br>
+
+For more detailed information and access to the full documentation, please visit [www.cifer.ai](https://cifer.ai)
+
+
+
+# Changelog
+
+## [0.1.18] - 2024-09-29
+### Added
+- Initial release of `FedServer` class that supports federated learning using gRPC.
+- Added client registration functionality with `clientRegister`.
+- Added model training round management with `startServer` function.
+- Implemented federated averaging (FedAvg) aggregation for model weights.
+- Model validation functionality with `__callModelValidation` method.
+- Support for handling multiple clients concurrently with threading.
+- Configurable server via `config.json`.
+
+### Changed
+- Modularized the code for future extension and improvement.
+- Created configuration options for server IP, port, and `max_receive_message_length` via the `config.json` file.
+
+### Fixed
+- Optimized client handling to prevent blocking during registration and learning rounds.
+
+
+## [0.1.15-0.1.17] - 2024-09-14
+### Fixed
+- Resolved bug in data processing related to incorrect input handling.
+
+## [0.1.14] - 2024-09-013
+### Fixed
+- Resolved bug in data processing related to incorrect input handling.
+
+## [0.1.13] - 2024-09-08
+### Added
+-- Integrate Tensorflow and Huggingface's Transformer
+New Integration: Added support for TensorFlow and HuggingFace's Transformers library to enhance model training and expand compatibility with popular AI frameworks.
+### Fixed
+-- Resolved various bugs to improve system stability and performance.
+This update continues to build on CiferAI's federated learning and fully homomorphic encryption (FHE) framework, focusing on enhanced compatibility, privacy, and security in decentralized machine learning environments.
+
+## [0.1.11] - 2024-09-08
+### Changed
+- Homepage --- cifer.ai
+Documentation. --- cifer.ai/documentation
+Repository --- https://github.com/CiferAI/ciferai
+
+## [0.1.10] - 2024-09-08
+### Changed
+- Updated `README.md` to improve content and information about Cifer.
+
+## [0.0.9] - 2024-09-01
+### Added
+- Added new feature for handling exceptions in the main module.
+- Included additional error logging functionality.
+
+## [0.0.8] - 2024-08-25
+### Fixed
+- Resolved bug in data processing related to incorrect input handling.

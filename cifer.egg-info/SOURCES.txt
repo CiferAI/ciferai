@@ -1,0 +1,17 @@
+README.md
+setup.py
+cifer/__init__.py
+cifer/aux_phe.py
+cifer/client.py
+cifer/datasets.py
+cifer/fedLearn.py
+cifer/fed_grpc_pb2.py
+cifer/fed_grpc_pb2_grpc.py
+cifer/fedlearn.py
+cifer/homocryption.py
+cifer/models.py
+cifer.egg-info/PKG-INFO
+cifer.egg-info/SOURCES.txt
+cifer.egg-info/dependency_links.txt
+cifer.egg-info/requires.txt
+cifer.egg-info/top_level.txt

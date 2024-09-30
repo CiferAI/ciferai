@@ -1,0 +1,11 @@
+{
+    "n_round_clients": 3,
+    "min_clients": 2,
+    "max_rounds": 10,
+    "acc_target": 0.85,
+    "grpc_config": {
+        "ip_address": "127.0.0.1",
+        "port": "50051",
+        "max_receive_message_length": 104857600
+    }
+}
