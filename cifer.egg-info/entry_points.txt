@@ -1,0 +1,2 @@
+[console_scripts]
+cifer-server = cifer.fed_server:run_grpc_server

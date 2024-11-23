@@ -1,1 +1,1 @@
-__version__ = "Cifer Version 1.0"
+from .connection_handler import run_federated_server

@@ -4,7 +4,7 @@
   </a>
 </p>
 
-Cifer is a **Privacy-Preserving Machine Learning (PPML) framework** offers several methods for secure, private, collaborative machine learning **“Federated Learning”** and **“Fully Homomorphic Encryption”**
+Cifer provides **a decentralized AI development ecosystem with data-ownership proof on the Cifer blockchain,** using **a Privacy-Preserving Machine Learning (PPML) framework** offers several methods for secure, private, collaborative machine learning **“Federated Learning”** and **“Fully Homomorphic Encryption”**
 
 [![GitHub license](https://img.shields.io/github/license/CiferAI/ciferai)](https://github.com/CiferAI/ciferai/blob/main/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/CiferAI/ciferai/blob/main/CONTRIBUTING.md)
@@ -26,7 +26,7 @@ Cifer is a **Privacy-Preserving Machine Learning (PPML) framework** offers sever
 
 # Introduction
 
-Cifer is a Privacy-Preserving Machine Learning (PPML) framework designed to revolutionize the way organizations approach secure, private, and collaborative machine learning. In an era where data privacy and security are paramount, Cifer offers a comprehensive solution that combines advanced technologies to enable privacy-conscious AI development and deployment.
+Cifer provides a decentralized AI development ecosystem with data-ownership proof on the Cifer blockchain, using a Privacy-Preserving Machine Learning (PPML) framework designed to revolutionize the way organizations approach secure, private, and collaborative machine learning. In an era where data privacy and security are paramount, Cifer offers a comprehensive solution that combines advanced technologies to enable privacy-conscious AI development and deployment.
 
 ## Core Modules
 1. **Federated Learning (FedLearn):** Cifer's FedLearn module allows for decentralized machine learning, enabling multiple parties to collaborate on model training without sharing raw data.
@@ -285,15 +285,8 @@ After the computations are complete, the Private Key is used to decrypt the resu
 
 <br>
 
-## Example Dataset
-
-In our example, we use the **[IQOTHNCCD Lung Cancer Dataset](https://www.kaggle.com/datasets/adityamahimkar/iqothnccd-lung-cancer-dataset?resource=download)** from Kaggle. This dataset is used to demonstrate Cifer’s machine learning capabilities in a healthcare context.
-
-<br>
-
 ---
-
 <br>
 
-For more details, please visit the [Cifer Website](https://cifer.ai) for project information and the [Cifer Documentation](https://cifer.ai/documentation) for comprehensive documentation.
+For more detailed information and access to the full documentation, please visit [www.cifer.ai](https://cifer.ai)
 
