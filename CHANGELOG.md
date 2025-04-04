@@ -1,4 +1,19 @@
 # Changelog
+
+## [1.0.6] - 2025-03-23
+
+### Fixed
+- 🛠️ Resolved bug in data processing related to incorrect input handling.
+- ✅ Improved error handling for missing or corrupted dataset files.
+- ⚡ Optimized model loading process to prevent `AttributeError` in `CiferClient`.
+- 🔐 Fixed issue where encrypted parameters were not being properly decrypted:
+
+## [1.0.4] - 2025-03-17
+### Fixed
+- 🛠️ Resolved bug in data processing related to incorrect input handling.
+- ✅ Improved error handling for missing or corrupted dataset files.
+- ⚡ Optimized model loading process to prevent `AttributeError` in `CiferClient`.
+
 ## [1.0.3] - 2025-03-11
 ### Fixed
 - Resolved bug in data processing related to incorrect input handling.

@@ -6,7 +6,7 @@ import tensorflow as tf
 import numpy as np
 
 class CiferServer:
-    def __init__(self, encoded_project_id, encoded_company_id, encoded_client_id, base_api="http://localhost:5000", dataset_path=None, model_path=None):
+    def __init__(self, encoded_project_id, encoded_company_id, encoded_client_id, base_api="https://workspace.cifer.ai/FederatedApi", dataset_path=None, model_path=None):
         self.project_id = encoded_project_id
         self.company_id = encoded_company_id
         self.client_id = encoded_client_id

@@ -6,13 +6,13 @@ import tensorflow as tf
 import numpy as np
 
 class CiferServer:
-    def __init__(self, encoded_project_id, encoded_company_id, encoded_client_id, base_api="https://workspace.cifer.ai/", dataset_path=None, model_path=None):
+    def __init__(self, encoded_project_id, encoded_company_id, encoded_client_id, base_api="https://workspace.cifer.ai/FederatedApi", dataset_path=None, model_path=None):
         self.project_id = encoded_project_id
         self.company_id = encoded_company_id
         self.client_id = encoded_client_id
         self.base_api = base_api  
         self.dataset_path = dataset_path  
-        self.model_path = model_path  # ✅ เพิ่ม model_path
+        self.model_path = model_path  # ✅ Added model_path
 
         print(f"🚀 Server Initialized! Base API: {self.base_api}")
         if self.dataset_path:
@@ -22,7 +22,7 @@ class CiferServer:
 
     def load_model(self):
         """
-        ✅ โหลดโมเดลจากไฟล์ (ถ้ามี) หรือจาก Clients
+        ✅ Load model from file (if available) or from Clients
         """
         if self.model_path and os.path.exists(self.model_path):
             print(f"✅ Loading Local Model: {self.model_path}")
@@ -33,7 +33,7 @@ class CiferServer:
 
     def fetch_client_models(self):
         """
-        ✅ ดึงโมเดลจาก Clients ผ่าน API
+        ✅ Fetch models from Clients via API
         """
         url = f"{self.base_api}/get_client_models/{self.project_id}"
         response = requests.get(url)
@@ -51,7 +51,7 @@ class CiferServer:
 
     def load_models(self, model_data_list):
         """
-        ✅ แปลงโมเดลจาก Base64 และโหลดเป็น TensorFlow Model
+        ✅ Decode models from Base64 and load as TensorFlow Models
         """
         models = []
         for i, model_info in enumerate(model_data_list):
@@ -70,7 +70,7 @@ class CiferServer:
 
     def fed_avg(self, models):
         """
-        ✅ Aggregation แบบ FedAvg (ค่าเฉลี่ยของ weights)
+        ✅ FedAvg Aggregation (average of weights)
         """
         print("🔄 Performing FedAvg Aggregation...")
 
@@ -86,7 +86,7 @@ class CiferServer:
 
     def upload_aggregated_model(self, model):
         """
-        อัปโหลดโมเดล Aggregation ไปยังเซิร์ฟเวอร์
+        Upload the aggregated model to the server
         """
         if not self.base_api:
             print("❌ ERROR: Base API URL is missing!")
@@ -105,7 +105,7 @@ class CiferServer:
         }
 
         api_url = f"{self.base_api}/upload_aggregated_model"
-        print(f"📡 Uploading aggregated model to {api_url}...")  # ✅ Debugging จุดนี้
+        print(f"📡 Uploading aggregated model to {api_url}...")  # ✅ Debugging here
 
         response = requests.post(api_url, files=files, data=data)
 
@@ -117,7 +117,7 @@ class CiferServer:
 
     def run(self):
         """
-        ✅ กระบวนการ Aggregation
+        ✅ Aggregation process
         """
         print("✅ Server is running...")
 

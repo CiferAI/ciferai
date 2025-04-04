@@ -6,6 +6,6 @@ class CiferConfig:
         self.project_id = encoded_project_id
         self.company_id = encoded_company_id
         self.client_id = encoded_client_id
-        self.base_api = base_api or "http://localhost:5000"
+        self.base_api = base_api or "https://workspace.cifer.ai/FederatedApi"
         self.dataset_path = dataset_path
         self.model_path = model_path

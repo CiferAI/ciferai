@@ -21,7 +21,7 @@ class FederatedServer:
         self.connected_clients = set()
         self.model_weights_list = []
 
-        # สร้าง SSL context สำหรับ WSS ถ้าเลือกใช้ secure
+        # Create SSL context for WSS if secure is enabled
         if self.use_secure:
             self.ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
             self.ssl_context.load_cert_chain(certfile=certfile, keyfile=keyfile)
@@ -49,7 +49,7 @@ class FederatedServer:
             return False
 
     async def receive_message(self, websocket, path):
-        # ตรวจสอบสิทธิ์ของ client ก่อนอนุญาตการเชื่อมต่อ
+        # Authenticate client before allowing connection
         if not await self.authenticate_client(websocket):
             return
 
@@ -95,7 +95,7 @@ class FederatedServer:
                 self.model_weights_list = []
 
                 print("Training model on server...")
-                # ตัวอย่างการฝึกโมเดล
+                # Example of training the model on the server
                 x_train, y_train = np.random.rand(1000, 28, 28), np.random.randint(0, 10, 1000)
                 train_custom_model(self.custom_model, x_train, y_train, epochs=10)
 

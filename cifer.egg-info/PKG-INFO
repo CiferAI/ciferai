@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: cifer
-Version: 1.0.2
+Version: 1.0.6
 Summary: Federated Learning and Fully Homomorphic Encryption
 Home-page: https://github.com/cifer-ai/cifer
 Author: Cifer.ai
@@ -205,7 +205,7 @@ Where extra can be:<br>
 # Importing Cifer
 After installing Cifer, you can import its modules in your Python scripts or interactive environments. The two main modules, FedLearn and FHE (Fully Homomorphic Encryption), can be imported as follows:
 
-<div class="filetype">
+<div style="background:#353a42; width:fit-content; padding:6px 12px; border-radius:6px 6px 0 0; font-size:12px; font-family:monospace;">
 <img src="https://cifer.ai/assets/themes/cifer/images/icon/icon-python.png" width="14" style="position:relative; top:2px; left:-1px;" alt="Python" /> Python</div>
 
 ```python
@@ -218,9 +218,21 @@ from cifer import homocryption as fhe
 # Basic Usage Examples
 Here are some quick examples to get you started:
 
+### Communication Methods in Cifer FedLearn
+Cifer FedLearn supports two communication methods for federated learning:
+
+### Method A: RPC Web API via Cifer Workspace
+In this approach, users create an ID via the Cifer Workspace, allowing direct interaction with the Cifer FedLearn server through an RPC-based Web API. This method simplifies deployment as users do not need to set up their own server.
+
+
+### Method B: WebSocket Server (Self-Hosted)
+In this approach, users set up their own federated learning server within their company infrastructure. This provides full control over data and security, allowing for on-premise deployment and customization.
+
+Choose the method that best fits your use case and infrastructure requirements.
+
 <br>
 
-## Basic Usage Examples: FedLearn
+## Method A: Using RPC Web API via Cifer Workspace
 
 ### Key Adjustments: FedLearn
 **FedLearn** in Cifer operates with two roles (as referred to in [Cifer Workspace](https://workspace.cifer.ai/)):
@@ -237,7 +249,7 @@ Here are some quick examples to get you started:
 
 To use the Cifer FedLearn, start by importing the required module:
 
-<div class="filetype">
+<div style="background:#353a42; width:fit-content; padding:6px 12px; border-radius:6px 6px 0 0; font-size:12px; font-family:monospace;">
 <img src="https://cifer.ai/assets/themes/cifer/images/icon/icon-python.png" width="14" style="position:relative; top:2px; left:-1px;" alt="Python" /> Python</div>
 
 ```python
@@ -250,7 +262,7 @@ from cifer import CiferServer
 
 The server initializes the federated learning process by setting up the communication channel, specifying the model path, and defining the initial dataset:
 
-<div class="filetype">
+<div style="background:#353a42; width:fit-content; padding:6px 12px; border-radius:6px 6px 0 0; font-size:12px; font-family:monospace;">
 <img src="https://cifer.ai/assets/themes/cifer/images/icon/icon-python.png" width="14" style="position:relative; top:2px; left:-1px;" alt="Python" /> Python</div>
 
 ```python
@@ -302,8 +314,7 @@ model_path = "YOUR_MODEL_PATH"
 
 <br>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-<h3><i class="bi bi-github"></i>&nbsp; Git Clone:</h3>
+<h3><img src="https://cdn.iconscout.com/icon/free/png-512/free-github-icon-download-in-svg-png-gif-file-formats--logo-minimal-icons-pack-files-folders-436555.png?f=webp&w=512" width="20" style="vertical-align:top;">&nbsp; Git Clone:</h3>
 
 You can use the following CLI command to clone a model repository into your computer:
 
@@ -335,7 +346,7 @@ pip install transformers
 
 Hugging Face's `transformers` library provides access to pre-trained machine learning models for various tasks. This enables you to use ready-made models without training from scratch.
 
-<div class="filetype">
+<div style="background:#353a42; width:fit-content; padding:6px 12px; border-radius:6px 6px 0 0; font-size:12px; font-family:monospace;">
 <img src="https://cifer.ai/assets/themes/cifer/images/icon/icon-python.png" width="14" style="position:relative; top:2px; left:-1px;" alt="Python" /> Python</div>
 
 ```python
@@ -356,7 +367,7 @@ model_path = "YOUR_MODEL_FOLDER"
 
 Start the server to begin receiving and aggregating model updates:
 
-<div class="filetype">
+<div style="background:#353a42; width:fit-content; padding:6px 12px; border-radius:6px 6px 0 0; font-size:12px; font-family:monospace;">
 <img src="https://cifer.ai/assets/themes/cifer/images/icon/icon-python.png" width="14" style="position:relative; top:2px; left:-1px;" alt="Python" /> Python</div>
 
 ```python
@@ -372,7 +383,7 @@ server.run()
 
 The code begins by importing Cifer’s federated learning module:
 
-<div class="filetype">
+<div style="background:#353a42; width:fit-content; padding:6px 12px; border-radius:6px 6px 0 0; font-size:12px; font-family:monospace;">
 <img src="https://cifer.ai/assets/themes/cifer/images/icon/icon-python.png" width="14" style="position:relative; top:2px; left:-1px;" alt="Python" /> Python</div>
 
 ```python
@@ -381,7 +392,7 @@ import cifer
 
 Then, import other necessary modules:
 
-<div class="filetype">
+<div style="background:#353a42; width:fit-content; padding:6px 12px; border-radius:6px 6px 0 0; font-size:12px; font-family:monospace;">
 <img src="https://cifer.ai/assets/themes/cifer/images/icon/icon-python.png" width="14" style="position:relative; top:2px; left:-1px;" alt="Python" /> Python</div>
 
 ```python
@@ -404,7 +415,7 @@ Put the local dataset path in `dataset_path`, and set up the dataset configurati
 
 In this example, we use the MNIST dataset, normalize pixel values, and save it as a NumPy file.
 
-<div class="filetype">
+<div style="background:#353a42; width:fit-content; padding:6px 12px; border-radius:6px 6px 0 0; font-size:12px; font-family:monospace;">
 <img src="https://cifer.ai/assets/themes/cifer/images/icon/icon-python.png" width="14" style="position:relative; top:2px; left:-1px;" alt="Python" /> Python</div>
 
 ```python
@@ -425,7 +436,7 @@ Put the local model path in `model_path`, and set up the model configuration bas
 
 In this example, we define a simple neural network model, set loss and optimization metrics, and save it as an H5 file.
 
-<div class="filetype">
+<div style="background:#353a42; width:fit-content; padding:6px 12px; border-radius:6px 6px 0 0; font-size:12px; font-family:monospace;">
 <img src="https://cifer.ai/assets/themes/cifer/images/icon/icon-python.png" width="14" style="position:relative; top:2px; left:-1px;" alt="Python" /> Python</div>
 
 ```python
@@ -450,8 +461,7 @@ if not os.path.exists(model_path):
 
 <br>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-<h3><i class="bi bi-github"></i>&nbsp; Git Clone:</h3>
+<h3><img src="https://cdn.iconscout.com/icon/free/png-512/free-github-icon-download-in-svg-png-gif-file-formats--logo-minimal-icons-pack-files-folders-436555.png?f=webp&w=512" width="20" style="vertical-align:top;">&nbsp; Git Clone:</h3>
 
 You can use the following CLI command to clone a model repository into your computer:
 
@@ -483,7 +493,7 @@ pip install transformers
 
 Hugging Face's `transformers` library provides access to pre-trained machine learning models for various tasks. This enables you to use ready-made models without training from scratch.
 
-<div class="filetype">
+<div style="background:#353a42; width:fit-content; padding:6px 12px; border-radius:6px 6px 0 0; font-size:12px; font-family:monospace;">
 <img src="https://cifer.ai/assets/themes/cifer/images/icon/icon-python.png" width="14" style="position:relative; top:2px; left:-1px;" alt="Python" /> Python</div>
 
 ```python
@@ -510,7 +520,7 @@ In Cifer Workspace, the client is referred to as **'Contributor'** and follows t
 
 Replace only the ID values in the following section:
 
-<div class="filetype">
+<div style="background:#353a42; width:fit-content; padding:6px 12px; border-radius:6px 6px 0 0; font-size:12px; font-family:monospace;">
 <img src="https://cifer.ai/assets/themes/cifer/images/icon/icon-python.png" width="14" style="position:relative; top:2px; left:-1px;" alt="Python" /> Python</div>
 
 ```python
@@ -533,6 +543,90 @@ Begin training and send model updates to the server:
 ```python
 client.run()
 ```
+
+<br><br>
+
+## Method B: Using a Self-Hosted WebSocket Server
+
+### Setting Up a Federated Learning Server
+
+This method allows users to set up their own federated learning server within their company infrastructure.
+
+#### 1. Importing Cifer:
+The code begins by importing Cifer’s federated learning module: `from cifer import fedlearn as fl`, which allows you to use the FedLearn framework in your federated learning setup.
+
+
+#### 2. Defining Datasets:
+The dataset is stored locally, and the path to the dataset is defined using `local_data_path`. Ensure your dataset is prepared and accessible in the specified directory on your local machine. This local path will be used to load data for federated learning:
+```
+local_data_path = "/path/to/local/data"
+```
+
+#### 3. Defining Models:
+You can integrate models into Cifer’s FedLearn in three different ways, depending on your requirements:
+
+<br>
+
+**3.1 Local Model:**<br>
+If you have a pre-trained model stored locally, you can specify the local path to the model and use it for training:
+```
+local_model_path = "/path/to/local/model"
+```
+<br>
+
+**3.2 Git Clone:**<br>
+If your model is hosted on GitHub, you can clone the repository directly into your environment using the `os.system("git clone ...")` command:
+```
+os.system("git clone https://github.com/your-repo/your-model-repo.git")
+```
+<br>
+
+**3.3 Hugging Face Model:**<br>
+You can integrate a pre-trained model from Hugging Face’s `transformers` library. For instance, you can load a BERT-based model like this:
+```
+model_name = "distilbert-base-uncased"
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForSequenceClassification.from_pretrained(model_name)
+```
+
+### Code Example
+
+```
+# Import the necessary modules from the Cifer framework
+from cifer import fedlearn as fl
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
+import torch
+import os
+
+# Define paths to local data and model
+local_data_path = "/path/to/local/data"
+local_model_path = "/path/to/local/model"
+
+# Option to load a pre-trained Hugging Face model
+model_name = "distilbert-base-uncased"
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForSequenceClassification.from_pretrained(model_name)
+
+# Alternatively, clone a model repository from GitHub (if necessary)
+os.system("git clone https://github.com/your-repo/your-model-repo.git")
+
+# Initialize the federated learning server using Cifer's FedLearn
+server = fl.Server()
+
+# Define a federated learning strategy
+strategy = fl.strategy.FedAvg(
+    # Custom data and model paths for local storage and Hugging Face model usage
+    data_path=local_data_path,
+    model_path=local_model_path,
+    model_fn=lambda: model,  # Hugging Face model used as the base model
+)
+
+# Start the federated learning process
+if __name__ == "__main__":
+    server.run(strategy)
+```
+
+
 
 <br><br>
 
@@ -591,11 +685,28 @@ After the computations are complete, the Private Key is used to decrypt the resu
 
 For more detailed information and access to the full documentation, please visit [www.cifer.ai](https://cifer.ai/docs)
 
-<style>
-    .filetype {background:#353a42; width:fit-content; padding:6px 12px; border-radius:6px 6px 0 0; font-size:12px; font-family:monospace;}
-</style>
 
 # Changelog
+
+## [1.0.6] - 2025-03-23
+
+### Fixed
+- 🛠️ Resolved bug in data processing related to incorrect input handling.
+- ✅ Improved error handling for missing or corrupted dataset files.
+- ⚡ Optimized model loading process to prevent `AttributeError` in `CiferClient`.
+- 🔐 Fixed issue where encrypted parameters were not being properly decrypted:
+
+## [1.0.4] - 2025-03-17
+### Fixed
+- 🛠️ Resolved bug in data processing related to incorrect input handling.
+- ✅ Improved error handling for missing or corrupted dataset files.
+- ⚡ Optimized model loading process to prevent `AttributeError` in `CiferClient`.
+
+## [1.0.3] - 2025-03-11
+### Fixed
+- Resolved bug in data processing related to incorrect input handling.
+- Added WebSocket connectivity improvements to enhance stability and performance.
+
 
 ## [1.0.2] - 2025-03-09
 ### Fixed

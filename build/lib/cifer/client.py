@@ -23,16 +23,31 @@ class CiferClient:
         self.dataset_path = self.config.dataset_path
         self.model_path = self.config.model_path
 
+        # ✅ โหลดโมเดล
+        self.model = self.load_model()
+
     def load_dataset(self):
         """
         โหลด dataset จากไฟล์ หรือดึงจาก API
         """
         if os.path.exists(self.dataset_path):
             print(f"📂 Loading dataset from {self.dataset_path} ...")
-            return np.load(self.dataset_path)
+            data = np.load(self.dataset_path)
+            return data["train_images"], data["train_labels"]
         else:
             print("❌ Dataset not found! Please check dataset path.")
-            return None
+            return None, None
+
+    def load_model(self):
+        """
+        โหลดโมเดลจากไฟล์หรือดึงจากเซิร์ฟเวอร์
+        """
+        if os.path.exists(self.model_path):
+            print(f"📂 Loading model from {self.model_path} ...")
+            return tf.keras.models.load_model(self.model_path)
+        else:
+            print("❌ Model file not found, attempting to download...")
+            return self.download_model()
 
     def download_model(self):
         """
@@ -50,37 +65,51 @@ class CiferClient:
                 print(f"✅ Model downloaded successfully: {self.model_path}")
                 return tf.keras.models.load_model(self.model_path)
             else:
-                print("❌ No valid model received.")
-                return None
+                print("❌ No valid model received. Creating new model...")
+                return self.create_new_model()
         except Exception as e:
             print(f"❌ ERROR: {e}")
-            return None
+            return self.create_new_model()
+
+    def create_new_model(self):
+        """
+        สร้างโมเดลใหม่หากไม่มีโมเดลให้โหลด
+        """
+        print("🛠️ Creating new model...")
+        model = tf.keras.Sequential([
+            tf.keras.layers.Flatten(input_shape=(28, 28)),
+            tf.keras.layers.Dense(128, activation="relu"),
+            tf.keras.layers.Dense(10, activation="softmax")
+        ])
+        model.compile(optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"])
+        model.save(self.model_path)
+        print(f"✅ New model created and saved at {self.model_path}")
+        return model
 
     def train_model(self):
         print("🚀 Training model...")
-        
-        # ✅ ตรวจสอบว่า dataset มีอยู่จริง
-        if not os.path.exists(self.dataset_path):
-            print(f"❌ Dataset not found! Please check dataset path: {self.dataset_path}")
-            return None  # ✅ ป้องกัน TypeError
 
-        train_images, train_labels = np.load(self.dataset_path, allow_pickle=True)
+        # ✅ โหลด dataset
+        train_images, train_labels = self.load_dataset()
         
-        # ✅ ตรวจสอบค่า dataset ว่าโหลดถูกต้องไหม
         if train_images is None or train_labels is None:
             print("❌ ERROR: Dataset is empty or corrupted!")
-            return None
+            return None, None
+
+        # ✅ ตรวจสอบว่าโมเดลถูกโหลดแล้วหรือไม่
+        if self.model is None:
+            print("❌ ERROR: Model not loaded! Cannot train.")
+            return None, None
 
         self.model.compile(optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"])
         history = self.model.fit(train_images, train_labels, epochs=1, batch_size=32, verbose=1)
-        
+
         accuracy = history.history.get("accuracy", [None])[-1]
         if accuracy is None:
             print("❌ ERROR: Accuracy not found in training history!")
-            return None
+            return None, None
 
         return self.model, accuracy  # ✅ คืนค่า model และ accuracy
-
 
     def upload_model(self, model, accuracy):
         """
@@ -94,6 +123,7 @@ class CiferClient:
         data = {
             "project_id": self.config.project_id,
             "client_id": self.config.client_id,
+            "company_id": self.config.company_id,
             "accuracy": accuracy
         }
 
@@ -120,4 +150,3 @@ class CiferClient:
 
         print(f"✅ Training complete! Accuracy: {accuracy:.4f}")
         self.upload_model(model, accuracy)
-
