@@ -2,6 +2,8 @@ LICENSE
 README.md
 setup.py
 cifer/__init__.py
+cifer/agent_ace.py
+cifer/cli.py
 cifer/client.py
 cifer/config.py
 cifer/connection_handler.py
@@ -11,6 +13,7 @@ cifer/utils.py
 cifer.egg-info/PKG-INFO
 cifer.egg-info/SOURCES.txt
 cifer.egg-info/dependency_links.txt
+cifer.egg-info/entry_points.txt
 cifer.egg-info/requires.txt
 cifer.egg-info/top_level.txt
 cifer/datasets/__init__.py

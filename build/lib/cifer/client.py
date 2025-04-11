@@ -4,12 +4,12 @@ import json
 import tensorflow as tf
 import numpy as np
 import os
-from cifer.config import CiferConfig  # ✅ ดึงค่า Config
+from cifer.config import CiferConfig  # ✅ Load Config values
 
 class CiferClient:
     def __init__(self, encoded_project_id, encoded_company_id, encoded_client_id, base_api=None, dataset_path=None, model_path=None):
         """
-        กำหนดค่าเริ่มต้นของ Client
+        Initialize Client configuration
         """
         self.config = CiferConfig(
             encoded_project_id, 
@@ -19,16 +19,17 @@ class CiferClient:
             dataset_path, 
             model_path
         )
+        
         self.api_url = self.config.base_api
         self.dataset_path = self.config.dataset_path
         self.model_path = self.config.model_path
 
-        # ✅ โหลดโมเดล
+        # ✅ Load model
         self.model = self.load_model()
 
     def load_dataset(self):
         """
-        โหลด dataset จากไฟล์ หรือดึงจาก API
+        Load dataset from file or API
         """
         if os.path.exists(self.dataset_path):
             print(f"📂 Loading dataset from {self.dataset_path} ...")
@@ -40,7 +41,7 @@ class CiferClient:
 
     def load_model(self):
         """
-        โหลดโมเดลจากไฟล์หรือดึงจากเซิร์ฟเวอร์
+        Load model from file or fetch from server
         """
         if os.path.exists(self.model_path):
             print(f"📂 Loading model from {self.model_path} ...")
@@ -51,7 +52,7 @@ class CiferClient:
 
     def download_model(self):
         """
-        ดึงโมเดลล่าสุดจากเซิร์ฟเวอร์
+        Fetch the latest model from the server
         """
         url = f"{self.api_url}/get_latest_model/{self.config.project_id}"
         response = requests.get(url)
@@ -73,7 +74,7 @@ class CiferClient:
 
     def create_new_model(self):
         """
-        สร้างโมเดลใหม่หากไม่มีโมเดลให้โหลด
+        Create a new model if none is available
         """
         print("🛠️ Creating new model...")
         model = tf.keras.Sequential([
@@ -89,14 +90,14 @@ class CiferClient:
     def train_model(self):
         print("🚀 Training model...")
 
-        # ✅ โหลด dataset
+        # ✅ Load dataset
         train_images, train_labels = self.load_dataset()
         
         if train_images is None or train_labels is None:
             print("❌ ERROR: Dataset is empty or corrupted!")
             return None, None
 
-        # ✅ ตรวจสอบว่าโมเดลถูกโหลดแล้วหรือไม่
+        # ✅ Check if model is loaded
         if self.model is None:
             print("❌ ERROR: Model not loaded! Cannot train.")
             return None, None
@@ -109,11 +110,11 @@ class CiferClient:
             print("❌ ERROR: Accuracy not found in training history!")
             return None, None
 
-        return self.model, accuracy  # ✅ คืนค่า model และ accuracy
+        return self.model, accuracy  # ✅ Return model and accuracy
 
     def upload_model(self, model, accuracy):
         """
-        อัปโหลดโมเดลที่เทรนเสร็จแล้วกลับไปยังเซิร์ฟเวอร์
+        Upload the trained model back to the server
         """
         model.save(self.model_path)
         with open(self.model_path, "rb") as f:
@@ -136,14 +137,14 @@ class CiferClient:
     def run(self):
         print("🚀 Starting Federated Learning Cycle...")
 
-        # ✅ ตรวจสอบ dataset ก่อนเริ่ม
+        # ✅ Check for dataset before starting
         if not os.path.exists(self.dataset_path):
             print(f"❌ Dataset not found at {self.dataset_path}. Please check your dataset path.")
-            return  # ✅ หยุดการทำงานถ้าไม่มี dataset
+            return  # ✅ Stop execution if dataset not found
 
         model, accuracy = self.train_model()
         
-        # ✅ ป้องกัน `TypeError: cannot unpack non-iterable NoneType`
+        # ✅ Prevent `TypeError: cannot unpack non-iterable NoneType`
         if model is None or accuracy is None:
             print("❌ ERROR: Training failed. Please check logs.")
             return

@@ -19,6 +19,7 @@ class CiferClient:
             dataset_path, 
             model_path
         )
+        
         self.api_url = self.config.base_api
         self.dataset_path = self.config.dataset_path
         self.model_path = self.config.model_path

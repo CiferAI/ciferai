@@ -1,7 +1,11 @@
 # Changelog
+## [1.0.7] - 2025-04-11
+### Fixed
+- 🛠 Fixed CORS issue preventing the Agent from being accessed via web browsers
+- 🧠 Added support for launching Jupyter notebooks via an external `open_url` parameter
+- 📁 Corrected `webbrowser.open()` path handling to work properly on both `localhost` and public server (e.g. `workspace.cifer.ai`)
 
 ## [1.0.6] - 2025-03-23
-
 ### Fixed
 - 🛠️ Resolved bug in data processing related to incorrect input handling.
 - ✅ Improved error handling for missing or corrupted dataset files.

@@ -1,7 +1,6 @@
 from setuptools import setup, find_packages
 import os
 
-# ฟังก์ชันโหลดไฟล์ README.md และ CHANGELOG.md อย่างปลอดภัย
 def read_file(filename):
     if os.path.exists(filename):
         with open(filename, "r", encoding="utf-8") as f:
@@ -10,7 +9,7 @@ def read_file(filename):
 
 setup(
     name="cifer",
-    version="1.0.6",
+    version="1.0.7",
     author="Cifer.ai",
     author_email="support@cifer.ai",
     description="Federated Learning and Fully Homomorphic Encryption",
@@ -68,5 +67,12 @@ setup(
         "Topic :: Security :: Cryptography",
         "Framework :: Flask",
     ],
+   entry_points={
+    'console_scripts': [
+        'cifer = cifer.cli:main',
+    ],
+},
+
+
     python_requires=">=3.7",
 )
