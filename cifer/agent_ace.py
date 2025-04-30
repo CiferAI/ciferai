@@ -35,7 +35,7 @@ def run_notebook():
         with open(save_path, 'wb') as f:
             f.write(r.content)
 
-        webbrowser.open(f"http://localhost:8888/notebooks/notebooks/{filename}")
+        webbrowser.open(f"http://localhost:8888/notebooks/{filename}")
 
         nb = nbformat.read(open(save_path), as_version=4)
         client = NotebookClient(nb)

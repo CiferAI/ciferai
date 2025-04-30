@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS  # ✅ เพิ่มสำหรับ CORS
+from flask_cors import CORS  # ✅ Added for CORS
 import os
 import requests
 import webbrowser
@@ -7,7 +7,7 @@ import nbformat
 from nbclient import NotebookClient
 
 app = Flask(__name__)
-CORS(app)  # ✅ อนุญาตให้ทุก origin เรียกได้ (หรือระบุ origin ก็ได้)
+CORS(app)  # ✅ Allow all origins to be called (or specify origin)
 
 def get_jupyter_root_dir():
     try:
@@ -35,7 +35,7 @@ def run_notebook():
         with open(save_path, 'wb') as f:
             f.write(r.content)
 
-        webbrowser.open(f"http://localhost:8888/notebooks/notebooks/{filename}")
+        webbrowser.open(f"http://localhost:8888/notebooks/{filename}")
 
         nb = nbformat.read(open(save_path), as_version=4)
         client = NotebookClient(nb)

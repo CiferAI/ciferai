@@ -1,9 +1,21 @@
 # Changelog
-## [1.0.7] - 2025-04-11
+
+## [1.0.8] - 2025-04-11
+### Added
+- ✨ Integrated `flask-cors` to support browser-based communication with the local Agent
+- 🌐 Added support for launching Jupyter notebooks via either `localhost` or a remote `open_url`
+- 📦 Included JavaScript client snippet for calling the agent directly from a web page
+- 🧪 Added support for Homomorphic Encryption workflows in the agent-client pipeline
+
+### Improved
+- 🧠 Refactored agent logic to dynamically handle notebook URLs and browser launch targets
+- 🔐 Enhanced agent's compatibility with encrypted notebook execution scenarios using homomorphic encryption
+- 📁 Improved compatibility with both local Jupyter and server-proxied environments (e.g., `/notebook` on `workspace.cifer.ai`)
+
 ### Fixed
-- 🛠 Fixed CORS issue preventing the Agent from being accessed via web browsers
-- 🧠 Added support for launching Jupyter notebooks via an external `open_url` parameter
-- 📁 Corrected `webbrowser.open()` path handling to work properly on both `localhost` and public server (e.g. `workspace.cifer.ai`)
+- ✅ Corrected hardcoded browser path (`/notebooks/notebooks/filename`) to proper rendering path
+
+
 
 ## [1.0.6] - 2025-03-23
 ### Fixed
