@@ -4,6 +4,10 @@ from tensorflow import keras
 from cifer import CiferServer
 import os
 
+# ✅ ตั้งค่า
+USE_ENCRYPTION = False  # ✅ เปลี่ยนเป็น True หากต้องการใช้งาน Homomorphic Encryption
+BASE_API_URL = "http://localhost/PHPCIMANIA08_ppml/cifer-ppml1.1/FederatedApi"
+
 # ✅ สร้าง Dataset ถ้ายังไม่มี
 dataset_path = "./mnist.npy"
 if not os.path.exists(dataset_path):
@@ -31,9 +35,10 @@ server = CiferServer(
     encoded_project_id="SldOWlozQVNyR3FQa3FpYjhzL2U2Zz09",
     encoded_company_id="NHZvalZnOXlyTmRXaUZiZkc4QnJrUT09",
     encoded_client_id="S294ZE12eUNjbTZ6OHhHQjk2dnk4QT09",
-    base_api="",
+    base_api=BASE_API_URL,
     dataset_path=dataset_path,
-    model_path=model_path
+    model_path=model_path,
+    use_encryption=USE_ENCRYPTION
 )
 
 server.run()

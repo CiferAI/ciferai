@@ -36,4 +36,9 @@ typer
 typing_extensions
 tzdata
 urllib3
+nbclient
+flask-cors
+ipykernel
+nbformat
 websocket-client
+notebook

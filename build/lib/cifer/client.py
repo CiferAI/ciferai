@@ -6,6 +6,7 @@ import numpy as np
 import os
 import pickle
 import logging
+
 try:
     from phe import paillier
     PHE_AVAILABLE = True
@@ -14,13 +15,11 @@ except ImportError:
 
 from cifer.config import CiferConfig
 
-# Setup logging
 logging.basicConfig(filename='client.log', level=logging.INFO, format='%(asctime)s - %(message)s')
-
 
 class CiferClient:
     def __init__(self, encoded_project_id, encoded_company_id, encoded_client_id, base_api=None,
-                 dataset_path=None, model_path=None, use_encryption=False, rounds=1, epochs=1):
+                 dataset_path=None, model_path=None, use_encryption=False):
         if isinstance(model_path, bool) and use_encryption is False:
             use_encryption = model_path
             model_path = None
@@ -31,16 +30,14 @@ class CiferClient:
             encoded_client_id,
             base_api,
             dataset_path,
-            model_path,
-            use_encryption
+            model_path
         )
 
         self.api_url = self.config.base_api
         self.dataset_path = self.config.dataset_path
         self.model_path = self.config.model_path
-        self.use_encryption = getattr(self.config, "use_encryption", False)
-        self.rounds = rounds
-        self.epochs = epochs
+        self.use_encryption = use_encryption
+        self.epochs = 1
 
         if self.use_encryption:
             if not PHE_AVAILABLE:
@@ -55,11 +52,23 @@ class CiferClient:
     def load_dataset(self):
         if os.path.exists(self.dataset_path):
             print(f"📂 Loading dataset from {self.dataset_path} ...")
-            data = np.load(self.dataset_path)
-            train_images, train_labels = data["train_images"], data["train_labels"]
-            if train_images.ndim != 3 or train_images.shape[1:] != (28, 28):
-                print("❌ Invalid dataset shape!")
+            try:
+                data = np.load(self.dataset_path)
+                train_images = data["train_images"]
+                train_labels = data["train_labels"]
+            except Exception as e:
+                print(f"❌ Error loading dataset: {e}")
                 return None, None
+
+            # ✅ รองรับทั้ง 3D (ภาพ) และ 2D (tabular)
+            if train_images.ndim == 3:
+                print("✅ Detected image dataset (e.g., MNIST).")
+            elif train_images.ndim == 2:
+                print("✅ Detected tabular dataset (e.g., Fraud Detection).")
+            else:
+                print(f"❌ Invalid dataset shape: {train_images.shape}")
+                return None, None
+
             return train_images, train_labels
         else:
             print("❌ Dataset not found! Please check dataset path.")
@@ -70,36 +79,26 @@ class CiferClient:
             print(f"📂 Loading model from {self.model_path} ...")
             return tf.keras.models.load_model(self.model_path)
         else:
-            print("❌ Model file not found, attempting to download...")
-            return self.download_model()
+            print("❌ Model file not found, creating new model...")
+            return self.create_new_model_by_dataset()
 
-    def download_model(self):
-        url = f"{self.api_url}/get_latest_model/{self.config.project_id}"
-        try:
-            response = requests.get(url, timeout=10)
-            data = response.json()
-            if data.get("status") == "success":
-                model_data = base64.b64decode(data["model"])
-                with open(self.model_path, "wb") as f:
-                    f.write(model_data)
-                print(f"✅ Model downloaded successfully: {self.model_path}")
-                return tf.keras.models.load_model(self.model_path)
-            else:
-                print("❌ No valid model received. Creating new model...")
-                return self.create_new_model()
-        except Exception as e:
-            print(f"❌ ERROR: {e}")
-            logging.error(f"Download failed: {e}")
-            return self.create_new_model()
+    def create_new_model_by_dataset(self):
+        train_images, train_labels = self.load_dataset()
+        if train_images is None:
+            raise ValueError("Cannot create model: dataset not found or invalid.")
 
-    def create_new_model(self):
-        print("🛠️ Creating new model...")
+        input_shape = train_images.shape[1:]  # ex. (28, 28) or (8,)
+        print(f"🛠️ Creating new model with input shape {input_shape} ...")
+
         model = tf.keras.Sequential([
-            tf.keras.layers.Flatten(input_shape=(28, 28)),
-            tf.keras.layers.Dense(128, activation="relu"),
-            tf.keras.layers.Dense(10, activation="softmax")
+            tf.keras.layers.Input(shape=input_shape),
+            tf.keras.layers.Flatten() if len(input_shape) > 1 else tf.keras.layers.Lambda(lambda x: x),
+            tf.keras.layers.Dense(64, activation="relu"),
+            tf.keras.layers.Dense(32, activation="relu"),
+            tf.keras.layers.Dense(1, activation="sigmoid")  # For binary classification
         ])
-        model.compile(optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"])
+        model.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"])
+        os.makedirs(os.path.dirname(self.model_path), exist_ok=True)
         model.save(self.model_path)
         print(f"✅ New model created and saved at {self.model_path}")
         return model
@@ -115,7 +114,13 @@ class CiferClient:
             print("❌ ERROR: Model not loaded! Cannot train.")
             return None, None
 
-        self.model.compile(optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"])
+        expected_shape = self.model.input_shape[1:]
+        actual_shape = train_images.shape[1:]
+        if expected_shape != actual_shape:
+            print(f"❌ Shape mismatch: Model expects {expected_shape}, but dataset has {actual_shape}")
+            return None, None
+
+        self.model.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"])
         history = self.model.fit(train_images, train_labels, epochs=self.epochs, batch_size=32, verbose=1)
 
         accuracy = history.history.get("accuracy", [None])[-1]
@@ -173,19 +178,15 @@ class CiferClient:
             print("❌ Upload Exception:", str(e))
 
     def run(self):
-        print("🚀 Starting Federated Learning Cycle...")
+        print("🚀 Starting Federated Learning ...")
         if not os.path.exists(self.dataset_path):
             print(f"❌ Dataset not found at {self.dataset_path}. Please check your dataset path.")
             return
 
-        for round_num in range(1, self.rounds + 1):
-            print(f"\n🔁 Round {round_num}/{self.rounds}")
-            logging.info(f"Start Round {round_num}")
+        model, accuracy = self.train_model()
+        if model is None or accuracy is None:
+            print("❌ ERROR: Training failed. Please check logs.")
+            return
 
-            model, accuracy = self.train_model()
-            if model is None or accuracy is None:
-                print("❌ ERROR: Training failed. Please check logs.")
-                return
-
-            print(f"✅ Training complete! Accuracy: {accuracy:.4f}")
-            self.upload_model(model, accuracy)
+        print(f"✅ Training complete! Accuracy: {accuracy:.4f}")
+        self.upload_model(model, accuracy)

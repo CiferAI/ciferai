@@ -9,7 +9,7 @@ def read_file(filename):
 
 setup(
     name="cifer",
-    version="1.0.9",
+    version="1.0.14",
     author="Cifer.ai",
     author_email="support@cifer.ai",
     description="Federated Learning and Fully Homomorphic Encryption",
@@ -56,7 +56,12 @@ setup(
         "typing_extensions",
         "tzdata",
         "urllib3",
+        "nbclient",
+        "flask-cors",
+        "ipykernel",
+        "nbformat",
         "websocket-client",
+        "notebook"
     ],
     classifiers=[
         "Programming Language :: Python :: 3",

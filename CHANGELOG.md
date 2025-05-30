@@ -1,5 +1,56 @@
 # Changelog
 
+## \[1.0.14] - 2025-05-30
+
+### ✅ **\[New] Cifer CLI Agent & Kernel Integration**
+* Added `cifer` CLI with subcommands:
+  * `agent-ace` – Run Flask server to download & execute Jupyter Notebooks
+  * `register-kernel` – Automatically register Jupyter kernel for current Conda environment
+  * `download-notebook`, `sync`, and `train` – Utility commands for notebook management and testing
+* Introduced auto-registration for **🧠 Cifer AI Kernel** (`cifer-kernel`) on all CLI usage
+* Executed notebooks are now forced to run using the `cifer-kernel` for consistent environment behavior
+* Flask agent `/run_notebook` endpoint downloads, executes, and opens notebooks inside Jupyter
+
+
+## [1.0.13] - 2025-05-10
+
+### ✅ **\[New] Homomorphic Encryption (HE) Support**
+
+* Added `use_encryption=True` flag in both `CiferClient` and `CiferServer`
+* Integrated `Paillier` encryption using the `phe` library to secure model weights
+* Client now generates a keypair (`public_key`, `private_key`) and encrypts weights before upload
+* Encrypted model weights are uploaded via the new `/upload_encrypted_model` API
+
+---
+
+### ✅ **\[New] Server-Side Encrypted Model Aggregation**
+
+* Added `fetch_encrypted_models()` to retrieve encrypted weights from clients
+* Implemented `encrypted_fed_avg()` to perform homomorphic FedAvg without decrypting
+* Encrypted aggregation output is saved as `aggregated_encrypted_weights.pkl` for client-side decryption
+
+---
+
+### ✅ **\[New] PHP/CodeIgniter API Enhancements**
+
+* Added new API endpoint: `get_encrypted_client_models($project_id)` to fetch encrypted models only
+* Validates and stores encrypted models in the `model_updates` table
+* Automatically updates the project status to "Testing in Progress" when a model is uploaded
+
+---
+
+### ✅ **\[Fixes] Server Run Script Improvements**
+
+* Automatically creates `model_path` and `dataset_path` if not present
+* Added `USE_ENCRYPTION` flag in the run script to easily toggle encryption mode
+
+---
+
+### ⚙️ **Dependencies**
+
+* `phe>=1.5.0` for Paillier homomorphic encryption
+* `tensorflow>=2.0`, `numpy>=1.19`
+
 ## [1.0.8] - 2025-04-11
 ### Added
 - ✨ Integrated `flask-cors` to support browser-based communication with the local Agent
