@@ -22,12 +22,10 @@ class CiferServer:
         self.dataset_path = dataset_path
         self.model_path = model_path
         self.use_encryption = use_encryption
-
         print(f"🚀 Server Initialized! Encryption: {'ENABLED' if self.use_encryption else 'DISABLED'}")
 
         if self.use_encryption and not PHE_AVAILABLE:
             raise ImportError("Please install 'phe' for encrypted aggregation: pip install phe")
-
     def load_model(self):
         if self.model_path and os.path.exists(self.model_path):
             print(f"✅ Loading Local Model: {self.model_path}")
@@ -35,7 +33,6 @@ class CiferServer:
 
         print("🔄 No Local Model Found. Fetching from Clients...")
         return self.fetch_client_models()
-
     def fetch_client_models(self):
         url = f"{self.base_api}/get_client_models/{self.project_id}"
         response = requests.get(url)

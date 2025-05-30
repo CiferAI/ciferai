@@ -29,19 +29,15 @@ def run_notebook():
     filename = os.path.basename(url)
     jupyter_root = get_jupyter_root_dir()
     save_path = os.path.join(jupyter_root, filename)
-
     try:
         os.makedirs(os.path.dirname(save_path), exist_ok=True)
         r = requests.get(url)
         with open(save_path, 'wb') as f:
             f.write(r.content)
-
         webbrowser.open(f"http://localhost:8888/notebooks/{filename}")
-
         nb = nbformat.read(open(save_path), as_version=4)
         client = NotebookClient(nb, kernel_name=CIFER_KERNEL_NAME)
         client.execute()
-
         return jsonify({"status": "success", "file": filename})
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500

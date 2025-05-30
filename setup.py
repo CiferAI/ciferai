@@ -9,7 +9,7 @@ def read_file(filename):
 
 setup(
     name="cifer",
-    version="1.0.14",
+    version="1.0.15",
     author="Cifer.ai",
     author_email="support@cifer.ai",
     description="Federated Learning and Fully Homomorphic Encryption",
@@ -77,7 +77,6 @@ setup(
         'cifer = cifer.cli:main',
     ],
 },
-
 
     python_requires=">=3.7",
 )
