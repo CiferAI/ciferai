@@ -3,6 +3,7 @@ README.md
 setup.py
 cifer/__init__.py
 cifer/agent_ace.py
+cifer/agent_ace_deleted.py
 cifer/cli.py
 cifer/client.py
 cifer/config.py

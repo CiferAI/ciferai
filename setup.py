@@ -9,7 +9,7 @@ def read_file(filename):
 
 setup(
     name="cifer",
-    version="1.0.15",
+    version="1.0.16",
     author="Cifer.ai",
     author_email="support@cifer.ai",
     description="Federated Learning and Fully Homomorphic Encryption",
@@ -21,7 +21,6 @@ setup(
         "requests",
         "tensorflow>=2.0",
         "numpy",
-        "flask",  
         "uvicorn",  
         "pydantic",  
         "PyJWT",
@@ -61,7 +60,11 @@ setup(
         "ipykernel",
         "nbformat",
         "websocket-client",
-        "notebook"
+        "notebook",
+        "fastapi",
+        "scikit-learn",
+        "joblib",
+        "phe",
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
@@ -78,5 +81,5 @@ setup(
     ],
 },
 
-    python_requires=">=3.7",
+    python_requires=">=3.9",
 )

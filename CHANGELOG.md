@@ -1,4 +1,23 @@
 # Changelog
+## [1.0.15] - 2025-05-31
+
+### ✅ **[Improved] FastAPI Migration**
+* Migrated from Flask to **FastAPI** for the `/run_notebook` agent endpoint.
+* Enhanced performance and scalability using `uvicorn` ASGI server.
+* Full CORS middleware support added via FastAPI's built-in capabilities.
+* Swagger/OpenAPI docs now available at `/docs`.
+
+### ✅ **[Fixed] Python Compatibility & Kernel Registration**
+* Improved `ensure_kernel_registered()` logic to use the current `sys.executable` Python version.
+* Fixed Python version enforcement in `setup.py` (`python_requires=">=3.9"`).
+* Added compatibility checks for Jupyter kernel auto-registration.
+* Improved fallback behavior if `notebookapp` fails to resolve current Jupyter directory.
+
+### ✅ **[New] Dependencies and PyPI Metadata**
+* Added missing dependencies: `fastapi`, `scikit-learn`, `joblib`, `phe`.
+* Validated compatibility with Python 3.10 and 3.11.
+* Updated `setup.py` to support PyPI publishing with long description and entry point.
+
 
 ## \[1.0.14] - 2025-05-30
 
@@ -65,9 +84,6 @@
 
 ### Fixed
 - ✅ Corrected hardcoded browser path (`/notebooks/notebooks/filename`) to proper rendering path
-
-
-
 ## [1.0.6] - 2025-03-23
 ### Fixed
 - 🛠️ Resolved bug in data processing related to incorrect input handling.

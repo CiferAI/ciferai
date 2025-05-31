@@ -29,7 +29,7 @@ class FederatedServer:
             self.ssl_context = None
 
         if self.use_homomorphic:
-            self.private_key = RSA.generate(2048)
+            self.private_key = RSA.generate(3072)
             self.public_key = self.private_key.publickey()
 
     def decrypt_data(self, encrypted_data):

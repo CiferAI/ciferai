@@ -1,6 +1,6 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.4
 Name: cifer
-Version: 1.0.14
+Version: 1.0.16
 Summary: Federated Learning and Fully Homomorphic Encryption
 Home-page: https://github.com/cifer-ai/cifer
 Author: Cifer.ai
@@ -12,13 +12,12 @@ Classifier: Development Status :: 5 - Production/Stable
 Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
 Classifier: Topic :: Security :: Cryptography
 Classifier: Framework :: Flask
-Requires-Python: >=3.7
+Requires-Python: >=3.9
 Description-Content-Type: text/markdown
 License-File: LICENSE
 Requires-Dist: requests
 Requires-Dist: tensorflow>=2.0
 Requires-Dist: numpy
-Requires-Dist: flask
 Requires-Dist: uvicorn
 Requires-Dist: pydantic
 Requires-Dist: PyJWT
@@ -59,6 +58,20 @@ Requires-Dist: ipykernel
 Requires-Dist: nbformat
 Requires-Dist: websocket-client
 Requires-Dist: notebook
+Requires-Dist: fastapi
+Requires-Dist: scikit-learn
+Requires-Dist: joblib
+Requires-Dist: phe
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
 
 <p align="left">
   <a href="https://cifer.ai/">
@@ -692,6 +705,25 @@ For more detailed information and access to the full documentation, please visit
 
 
 # Changelog
+## [1.0.15] - 2025-05-31
+
+### ✅ **[Improved] FastAPI Migration**
+* Migrated from Flask to **FastAPI** for the `/run_notebook` agent endpoint.
+* Enhanced performance and scalability using `uvicorn` ASGI server.
+* Full CORS middleware support added via FastAPI's built-in capabilities.
+* Swagger/OpenAPI docs now available at `/docs`.
+
+### ✅ **[Fixed] Python Compatibility & Kernel Registration**
+* Improved `ensure_kernel_registered()` logic to use the current `sys.executable` Python version.
+* Fixed Python version enforcement in `setup.py` (`python_requires=">=3.9"`).
+* Added compatibility checks for Jupyter kernel auto-registration.
+* Improved fallback behavior if `notebookapp` fails to resolve current Jupyter directory.
+
+### ✅ **[New] Dependencies and PyPI Metadata**
+* Added missing dependencies: `fastapi`, `scikit-learn`, `joblib`, `phe`.
+* Validated compatibility with Python 3.10 and 3.11.
+* Updated `setup.py` to support PyPI publishing with long description and entry point.
+
 
 ## \[1.0.14] - 2025-05-30
 
@@ -758,9 +790,6 @@ For more detailed information and access to the full documentation, please visit
 
 ### Fixed
 - ✅ Corrected hardcoded browser path (`/notebooks/notebooks/filename`) to proper rendering path
-
-
-
 ## [1.0.6] - 2025-03-23
 ### Fixed
 - 🛠️ Resolved bug in data processing related to incorrect input handling.

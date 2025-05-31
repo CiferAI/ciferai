@@ -29,3 +29,23 @@
 2025-05-30 15:05:13,899 - Executing notebook with kernel: cifer-kernel
 2025-05-30 15:06:04,621 - Upload success. Accuracy: 0.999970018863678
 2025-05-30 15:06:07,347 - 127.0.0.1 - - [30/May/2025 15:06:07] "POST /run_notebook HTTP/1.1" 200 -
+2025-05-31 21:51:20,334 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:9999
+2025-05-31 21:51:20,335 - [33mPress CTRL+C to quit[0m
+2025-05-31 21:52:29,475 - 127.0.0.1 - - [31/May/2025 21:52:29] "OPTIONS /run_notebook HTTP/1.1" 200 -
+2025-05-31 21:52:30,687 - Executing notebook with kernel: cifer-kernel
+2025-05-31 21:52:52,071 - 127.0.0.1 - - [31/May/2025 21:52:52] "OPTIONS /run_notebook HTTP/1.1" 200 -
+2025-05-31 21:52:53,812 - Executing notebook with kernel: cifer-kernel
+2025-05-31 21:53:09,836 - You are saving your model as an HDF5 file via `model.save()` or `keras.saving.save_model(model)`. This file format is considered legacy. We recommend using instead the native Keras format, e.g. `model.save('my_model.keras')` or `keras.saving.save_model(model, 'my_model.keras')`. 
+2025-05-31 21:53:09,870 - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-05-31 21:53:11,420 - You are saving your model as an HDF5 file via `model.save()` or `keras.saving.save_model(model)`. This file format is considered legacy. We recommend using instead the native Keras format, e.g. `model.save('my_model.keras')` or `keras.saving.save_model(model, 'my_model.keras')`. 
+2025-05-31 21:53:11,833 - Upload success. Accuracy: 0.999970018863678
+2025-05-31 21:53:14,458 - 127.0.0.1 - - [31/May/2025 21:53:14] "POST /run_notebook HTTP/1.1" 200 -
+2025-05-31 21:53:26,162 - You are saving your model as an HDF5 file via `model.save()` or `keras.saving.save_model(model)`. This file format is considered legacy. We recommend using instead the native Keras format, e.g. `model.save('my_model.keras')` or `keras.saving.save_model(model, 'my_model.keras')`. 
+2025-05-31 21:53:26,201 - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-05-31 21:53:27,315 - You are saving your model as an HDF5 file via `model.save()` or `keras.saving.save_model(model)`. This file format is considered legacy. We recommend using instead the native Keras format, e.g. `model.save('my_model.keras')` or `keras.saving.save_model(model, 'my_model.keras')`. 
+2025-05-31 21:53:27,604 - Upload success. Accuracy: 0.9999799728393555
+2025-05-31 21:53:30,227 - 127.0.0.1 - - [31/May/2025 21:53:30] "POST /run_notebook HTTP/1.1" 200 -
+2025-05-31 22:03:38,225 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:9999
+2025-05-31 22:03:38,225 - [33mPress CTRL+C to quit[0m

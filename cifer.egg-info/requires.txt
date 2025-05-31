@@ -1,7 +1,6 @@
 requests
 tensorflow>=2.0
 numpy
-flask
 uvicorn
 pydantic
 PyJWT
@@ -42,3 +41,7 @@ ipykernel
 nbformat
 websocket-client
 notebook
+fastapi
+scikit-learn
+joblib
+phe
