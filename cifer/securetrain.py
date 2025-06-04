@@ -7,6 +7,7 @@ import numpy as np
 from io import BytesIO
 from phe import paillier
 from sklearn.linear_model import LogisticRegression
+from tensorflow.keras.models import load_model, save_model
 
 def get_key_paths(key_name):
     pub_path = f"keys/{key_name}/public.key"
@@ -128,6 +129,29 @@ def decrypt_model(model_path, output_path, key_name):
         pickle.dump(model, f)
     print("✅ Decrypted model saved successfully.")
 
+def encrypt_model(input_model_path, output_model_path, key_name):
+    print(f"📂 Loading plain model from: {input_model_path}")
+    with open(input_model_path, "rb") as f:
+        model = pickle.load(f)
+
+    pubkey = load_public_key(key_name)
+
+    print("🔐 Encrypting model coefficients...")
+    encrypted_coef = []
+    for coef in model.coef_[0]:
+        try:
+            val = pubkey.encrypt(coef)
+        except Exception:
+            val = coef
+        encrypted_coef.append(val)
+
+    model.coef_ = [encrypted_coef]
+    os.makedirs(os.path.dirname(output_model_path), exist_ok=True)
+    with open(output_model_path, "wb") as f:
+        pickle.dump(model, f)
+    print(f"✅ Encrypted model saved to: {output_model_path}")
+
+
 def decrypt_dataset(input_path, output_path, key_name):
     print(f"📂 Loading encrypted dataset from: {input_path}")
     with open(input_path, "rb") as f:
@@ -136,8 +160,7 @@ def decrypt_dataset(input_path, output_path, key_name):
     if not isinstance(enc_df, pd.DataFrame):
         raise ValueError("❌ Encrypted file does not contain a pandas DataFrame. Got: " + str(type(enc_df)))
 
-    privkey_path = os.path.join("keys", key_name, "private.key")
-    privkey = load_private_key(privkey_path)
+    privkey = load_private_key(key_name)  # ✅ FIXED
 
     print("🔓 Decrypting dataset...")
 
@@ -150,6 +173,63 @@ def decrypt_dataset(input_path, output_path, key_name):
     print(f"✅ Dataset decrypted and saved successfully to: {output_path}")
 
 
+def decrypt_dataset(input_path, output_path, key_name):
+    print(f"📂 Loading encrypted dataset from: {input_path}")
+    with open(input_path, "rb") as f:
+        enc_df = pickle.load(f)
+
+    if not isinstance(enc_df, pd.DataFrame):
+        raise ValueError("❌ Encrypted file does not contain a pandas DataFrame. Got: " + str(type(enc_df)))
+
+    privkey = load_private_key(key_name)
+
+    print("🔓 Decrypting dataset...")
+
+    dec_df = enc_df.copy()
+    for col in dec_df.columns:
+        dec_df[col] = dec_df[col].apply(lambda x: privkey.decrypt(x) if hasattr(x, 'ciphertext') else x)
+
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    dec_df.to_csv(output_path, index=False)
+    print(f"✅ Dataset decrypted and saved successfully to: {output_path}")
+
+def encrypt_keras_model(input_path, output_path, key_name):
+    print(f"📂 Loading Keras model from: {input_path}")
+    model = load_model(input_path)
+
+    pubkey = load_public_key(key_name)
+
+    print("🔐 Encrypting model weights...")
+    weights = model.get_weights()
+    encrypted_weights = [
+        np.vectorize(lambda x: pubkey.encrypt(float(x)))(w) for w in weights
+    ]
+
+    model.set_weights(encrypted_weights)
+
+    print(f"💾 Saving encrypted Keras model to: {output_path}")
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    model.save(output_path)
+    print("✅ Keras model encrypted and saved.")
+
+def decrypt_keras_model(input_path, output_path, key_name):
+    print(f"📂 Loading encrypted Keras model from: {input_path}")
+    model = load_model(input_path)
+
+    privkey = load_private_key(key_name)
+
+    print("🔓 Decrypting model weights...")
+    encrypted_weights = model.get_weights()
+    decrypted_weights = [
+        np.vectorize(lambda x: privkey.decrypt(x) if hasattr(x, 'ciphertext') else x)(w)
+        for w in encrypted_weights
+    ]
+
+    model.set_weights(decrypted_weights)
+
+    print(f"💾 Saving decrypted Keras model to: {output_path}")
+    model.save(output_path)
+    print("✅ Decrypted Keras model saved.")
 
 def main():
     parser = argparse.ArgumentParser(description="Cifer Secure Training (named key version)")
@@ -177,11 +257,29 @@ def main():
     dec.add_argument("--output-model", required=True)
     dec.add_argument("--key", required=True)
 
+    encrypt_model_parser = subparsers.add_parser("encrypt-model", help="Encrypt model from external source")
+    encrypt_model_parser.add_argument("--input-model", required=True)
+    encrypt_model_parser.add_argument("--output-model", required=True)
+    encrypt_model_parser.add_argument("--key", required=True)
+
+
+    keras_enc = subparsers.add_parser("encrypt-keras-model", help="Encrypt a Keras .h5 model")
+    keras_enc.add_argument("--input-model", required=True)
+    keras_enc.add_argument("--output-model", required=True)
+    keras_enc.add_argument("--key", required=True)
+
+    keras_dec = subparsers.add_parser("decrypt-keras-model", help="Decrypt a Keras .h5 model")
+    keras_dec.add_argument("--input-model", required=True)
+    keras_dec.add_argument("--output-model", required=True)
+    keras_dec.add_argument("--key", required=True)
+
     args = parser.parse_args()
     if args.command == "encrypt-dataset":
         encrypt_dataset(args.dataset, args.output, args.key)
     elif args.command == "decrypt-dataset":
         decrypt_dataset(args.input, args.output, args.key)  # ✅ เพิ่มตรงนี้
+    elif args.command == "encrypt-model":
+        encrypt_model(args.input_model, args.output_model, args.key)
     elif args.command == "train":
         train_model(
             args.encrypted_data,
@@ -191,6 +289,10 @@ def main():
             args.label)
     elif args.command == "decrypt-model":
         decrypt_model(args.input_model, args.output_model, args.key)
+    elif args.command == "encrypt-keras-model":
+        encrypt_keras_model(args.input_model, args.output_model, args.key)
+    elif args.command == "decrypt-keras-model":
+        decrypt_keras_model(args.input_model, args.output_model, args.key)
     else:
         parser.print_help()
 
