@@ -1,0 +1,21 @@
+แบบเก่า (ไม่มี HE):
+client = CiferClient(
+    encoded_project_id, 
+    encoded_company_id, 
+    encoded_client_id, 
+    base_api="http://localhost:8000/index.php/FederatedApi",
+    dataset_path="data.npz",
+    model_path="model.h5"
+)
+client.run()
+แบบใหม่ (มี HE):
+client = CiferClient(
+    encoded_project_id, 
+    encoded_company_id, 
+    encoded_client_id, 
+    base_api="http://localhost:8000/index.php/FederatedApi",
+    dataset_path="data.npz",
+    model_path="model.h5",
+    use_encryption=True
+)
+client.run()

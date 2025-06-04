@@ -1,0 +1,44 @@
+import numpy as np
+import tensorflow as tf
+from tensorflow import keras
+from cifer import CiferServer
+import os
+
+# ✅ ตั้งค่า
+USE_ENCRYPTION = False  # ✅ เปลี่ยนเป็น True หากต้องการใช้งาน Homomorphic Encryption
+BASE_API_URL = "http://localhost/PHPCIMANIA08_ppml/cifer-ppml1.1/FederatedApi"
+
+# ✅ สร้าง Dataset ถ้ายังไม่มี
+dataset_path = "./mnist.npy"
+if not os.path.exists(dataset_path):
+    print("📂 Creating new dataset...")
+    (train_images, _), _ = keras.datasets.mnist.load_data()
+    train_images = train_images / 255.0  # Normalize
+    np.save(dataset_path, train_images)
+    print("✅ Dataset created successfully!")
+
+# ✅ สร้าง Model ถ้ายังไม่มี
+model_path = "server_model.h5"
+if not os.path.exists(model_path):
+    print("🛠️ Creating new model...")
+    model = keras.Sequential([
+        keras.layers.Flatten(input_shape=(28, 28)),
+        keras.layers.Dense(128, activation="relu"),
+        keras.layers.Dense(10, activation="softmax")
+    ])
+    model.compile(optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"])
+    model.save(model_path)
+    print("✅ Model created and saved successfully!")
+
+# ✅ รันเซิร์ฟเวอร์
+server = CiferServer(
+    encoded_project_id="VVR6LzRGVmJzeko4OUhGU1NGOHpoUT09",
+    encoded_company_id="WExRUmN2bjU2QVNISFJBRVFNNFllUT09",
+    encoded_client_id="WUNsVlRsUUoxWFF2d0ljRTVsWGl5QT09",
+    base_api=BASE_API_URL,
+    dataset_path=dataset_path,
+    model_path=model_path,
+    use_encryption=USE_ENCRYPTION
+)
+
+server.run()

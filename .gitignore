@@ -1,0 +1,4 @@
+mnist_dataset.npz
+venv/
+*.pyc
+__pycache__/

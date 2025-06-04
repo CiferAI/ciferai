@@ -1,0 +1,76 @@
+2025-05-08 23:12:04,970 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:9999
+2025-05-08 23:12:04,970 - [33mPress CTRL+C to quit[0m
+2025-05-08 23:12:10,006 - 127.0.0.1 - - [08/May/2025 23:12:10] "OPTIONS /run_notebook HTTP/1.1" 200 -
+2025-05-08 23:12:11,179 - Executing notebook with kernel: python3
+2025-05-08 23:12:17,032 - 127.0.0.1 - - [08/May/2025 23:12:17] "[35m[1mPOST /run_notebook HTTP/1.1[0m" 500 -
+2025-05-08 23:25:23,640 - 127.0.0.1 - - [08/May/2025 23:25:23] "OPTIONS /run_notebook HTTP/1.1" 200 -
+2025-05-08 23:25:24,670 - Executing notebook with kernel: python3
+2025-05-08 23:25:29,903 - 127.0.0.1 - - [08/May/2025 23:25:29] "[35m[1mPOST /run_notebook HTTP/1.1[0m" 500 -
+2025-05-08 23:39:09,724 - 127.0.0.1 - - [08/May/2025 23:39:09] "OPTIONS /run_notebook HTTP/1.1" 200 -
+2025-05-08 23:39:11,637 - Executing notebook with kernel: python3
+2025-05-08 23:39:18,264 - 127.0.0.1 - - [08/May/2025 23:39:18] "[35m[1mPOST /run_notebook HTTP/1.1[0m" 500 -
+2025-05-09 01:02:49,789 - 127.0.0.1 - - [09/May/2025 01:02:49] "OPTIONS /run_notebook HTTP/1.1" 200 -
+2025-05-09 01:02:51,166 - Executing notebook with kernel: python3
+2025-05-09 01:02:57,375 - 127.0.0.1 - - [09/May/2025 01:02:57] "[35m[1mPOST /run_notebook HTTP/1.1[0m" 500 -
+2025-05-09 01:04:18,262 - 127.0.0.1 - - [09/May/2025 01:04:18] "OPTIONS /run_notebook HTTP/1.1" 200 -
+2025-05-09 01:04:19,158 - Executing notebook with kernel: python3
+2025-05-09 01:04:24,036 - 127.0.0.1 - - [09/May/2025 01:04:24] "[35m[1mPOST /run_notebook HTTP/1.1[0m" 500 -
+2025-05-09 01:20:06,049 - 127.0.0.1 - - [09/May/2025 01:20:06] "OPTIONS /run_notebook HTTP/1.1" 200 -
+2025-05-09 01:20:07,218 - Executing notebook with kernel: python3
+2025-05-09 01:20:13,305 - 127.0.0.1 - - [09/May/2025 01:20:13] "[35m[1mPOST /run_notebook HTTP/1.1[0m" 500 -
+2025-05-09 01:21:02,401 - 127.0.0.1 - - [09/May/2025 01:21:02] "OPTIONS /run_notebook HTTP/1.1" 200 -
+2025-05-09 01:21:03,464 - Executing notebook with kernel: python3
+2025-05-09 01:21:08,699 - 127.0.0.1 - - [09/May/2025 01:21:08] "[35m[1mPOST /run_notebook HTTP/1.1[0m" 500 -
+2025-05-09 01:21:37,322 - 127.0.0.1 - - [09/May/2025 01:21:37] "OPTIONS /run_notebook HTTP/1.1" 200 -
+2025-05-09 01:21:38,543 - Executing notebook with kernel: python3
+2025-05-09 01:21:44,061 - 127.0.0.1 - - [09/May/2025 01:21:44] "[35m[1mPOST /run_notebook HTTP/1.1[0m" 500 -
+2025-05-09 01:23:58,705 - 127.0.0.1 - - [09/May/2025 01:23:58] "OPTIONS /run_notebook HTTP/1.1" 200 -
+2025-05-09 01:24:00,525 - Executing notebook with kernel: python3
+2025-05-09 01:24:06,192 - 127.0.0.1 - - [09/May/2025 01:24:06] "[35m[1mPOST /run_notebook HTTP/1.1[0m" 500 -
+2025-05-09 01:29:00,454 - 127.0.0.1 - - [09/May/2025 01:29:00] "OPTIONS /run_notebook HTTP/1.1" 200 -
+2025-05-09 01:29:00,686 - 127.0.0.1 - - [09/May/2025 01:29:00] "[35m[1mPOST /run_notebook HTTP/1.1[0m" 500 -
+2025-05-09 01:30:33,738 - 127.0.0.1 - - [09/May/2025 01:30:33] "OPTIONS /run_notebook HTTP/1.1" 200 -
+2025-05-09 01:30:33,895 - 127.0.0.1 - - [09/May/2025 01:30:33] "[35m[1mPOST /run_notebook HTTP/1.1[0m" 500 -
+2025-05-09 01:34:47,801 - 127.0.0.1 - - [09/May/2025 01:34:47] "OPTIONS /run_notebook HTTP/1.1" 200 -
+2025-05-09 01:34:48,048 - 127.0.0.1 - - [09/May/2025 01:34:48] "[35m[1mPOST /run_notebook HTTP/1.1[0m" 500 -
+2025-05-09 01:35:04,069 - 127.0.0.1 - - [09/May/2025 01:35:04] "OPTIONS /run_notebook HTTP/1.1" 200 -
+2025-05-09 01:35:04,309 - 127.0.0.1 - - [09/May/2025 01:35:04] "[35m[1mPOST /run_notebook HTTP/1.1[0m" 500 -
+2025-05-30 20:51:19,231 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:9999
+2025-05-30 20:51:19,232 - [33mPress CTRL+C to quit[0m
+2025-05-30 20:51:37,990 - 127.0.0.1 - - [30/May/2025 20:51:37] "OPTIONS /run_notebook HTTP/1.1" 200 -
+2025-05-30 20:51:39,067 - Executing notebook with kernel: cifer-kernel
+2025-05-30 20:51:44,292 - 127.0.0.1 - - [30/May/2025 20:51:44] "[35m[1mPOST /run_notebook HTTP/1.1[0m" 500 -
+2025-05-30 20:52:05,302 - 127.0.0.1 - - [30/May/2025 20:52:05] "OPTIONS /run_notebook HTTP/1.1" 200 -
+2025-05-30 20:52:06,282 - Executing notebook with kernel: cifer-kernel
+2025-05-30 20:52:11,180 - 127.0.0.1 - - [30/May/2025 20:52:11] "[35m[1mPOST /run_notebook HTTP/1.1[0m" 500 -
+2025-05-30 20:52:30,135 - 127.0.0.1 - - [30/May/2025 20:52:30] "OPTIONS /run_notebook HTTP/1.1" 200 -
+2025-05-30 20:52:30,886 - Executing notebook with kernel: cifer-kernel
+2025-05-30 20:52:36,413 - 127.0.0.1 - - [30/May/2025 20:52:36] "[35m[1mPOST /run_notebook HTTP/1.1[0m" 500 -
+2025-05-30 20:52:37,081 - 127.0.0.1 - - [30/May/2025 20:52:37] "OPTIONS /run_notebook HTTP/1.1" 200 -
+2025-05-30 20:52:37,734 - Executing notebook with kernel: cifer-kernel
+2025-05-30 20:52:42,903 - 127.0.0.1 - - [30/May/2025 20:52:42] "[35m[1mPOST /run_notebook HTTP/1.1[0m" 500 -
+2025-05-30 20:52:44,556 - 127.0.0.1 - - [30/May/2025 20:52:44] "OPTIONS /run_notebook HTTP/1.1" 200 -
+2025-05-30 20:52:45,250 - Executing notebook with kernel: cifer-kernel
+2025-05-30 20:52:50,524 - 127.0.0.1 - - [30/May/2025 20:52:50] "[35m[1mPOST /run_notebook HTTP/1.1[0m" 500 -
+2025-05-30 20:58:09,983 - 127.0.0.1 - - [30/May/2025 20:58:09] "OPTIONS /run_notebook HTTP/1.1" 200 -
+2025-05-30 20:58:10,916 - Executing notebook with kernel: cifer-kernel
+2025-05-30 20:58:15,641 - 127.0.0.1 - - [30/May/2025 20:58:15] "OPTIONS /run_notebook HTTP/1.1" 200 -
+2025-05-30 20:58:16,430 - Executing notebook with kernel: cifer-kernel
+2025-05-30 20:58:17,974 - 127.0.0.1 - - [30/May/2025 20:58:17] "[35m[1mPOST /run_notebook HTTP/1.1[0m" 500 -
+2025-05-30 20:58:24,893 - 127.0.0.1 - - [30/May/2025 20:58:24] "[35m[1mPOST /run_notebook HTTP/1.1[0m" 500 -
+2025-05-30 20:58:38,515 - 127.0.0.1 - - [30/May/2025 20:58:38] "OPTIONS /run_notebook HTTP/1.1" 200 -
+2025-05-30 20:58:39,413 - Executing notebook with kernel: cifer-kernel
+2025-05-30 20:58:44,020 - Executing notebook with kernel: cifer-kernel
+2025-05-30 20:58:44,918 - 127.0.0.1 - - [30/May/2025 20:58:44] "[35m[1mPOST /run_notebook HTTP/1.1[0m" 500 -
+2025-05-30 20:58:49,022 - 127.0.0.1 - - [30/May/2025 20:58:49] "[35m[1mPOST /run_notebook HTTP/1.1[0m" 500 -
+2025-05-30 21:14:45,630 - 127.0.0.1 - - [30/May/2025 21:14:45] "OPTIONS /run_notebook HTTP/1.1" 200 -
+2025-05-30 21:14:46,487 - Executing notebook with kernel: cifer-kernel
+2025-05-30 21:14:52,387 - 127.0.0.1 - - [30/May/2025 21:14:52] "[35m[1mPOST /run_notebook HTTP/1.1[0m" 500 -
+2025-05-30 21:15:00,020 - 127.0.0.1 - - [30/May/2025 21:15:00] "OPTIONS /run_notebook HTTP/1.1" 200 -
+2025-05-30 21:15:01,053 - Executing notebook with kernel: cifer-kernel
+2025-05-30 21:15:06,706 - 127.0.0.1 - - [30/May/2025 21:15:06] "[35m[1mPOST /run_notebook HTTP/1.1[0m" 500 -
+2025-05-30 22:49:26,486 - 127.0.0.1 - - [30/May/2025 22:49:26] "OPTIONS /run_notebook HTTP/1.1" 200 -
+2025-05-30 22:49:27,513 - Executing notebook with kernel: cifer-kernel
+2025-05-30 22:49:33,321 - 127.0.0.1 - - [30/May/2025 22:49:33] "[35m[1mPOST /run_notebook HTTP/1.1[0m" 500 -
