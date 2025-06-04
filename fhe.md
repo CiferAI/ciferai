@@ -1,7 +1,7 @@
 1. dataset 
 -encrypt-dataset
 python -m cifer.securetrain encrypt-dataset \
-  --dataset "https://huggingface.co/datasets/CiferAI/Cifer-Fraud-Detection-Dataset-AF/resolve/main/part-1-14.csv" \
+  --dataset "datasets/decrypted_cifer_part1.csv" \
   --output datasets/encrypted_cifer_part1.pkl \
   --key alice
 

@@ -31,12 +31,11 @@ def load_public_key(key_name):
     with open(path, "rb") as f:
         return pickle.load(f)
 
-def load_private_key(key_name):
-    path = get_key_paths(key_name)[1]
+def load_private_key(path):
     print(f"📂 Loading private key from: {path}")
     with open(path, "rb") as f:
         return pickle.load(f)
-    
+
 def encrypt_dataset(dataset_path_or_url, output_path, key_name):
     print("🔄 Loading dataset...")
     if dataset_path_or_url.startswith("http"):
@@ -47,25 +46,23 @@ def encrypt_dataset(dataset_path_or_url, output_path, key_name):
         df = pd.read_csv(dataset_path_or_url)
         print("✅ Dataset loaded from local path.")
 
-    # ตรวจจับเฉพาะคอลัมน์ที่เป็นตัวเลขเท่านั้น
-    df = df.select_dtypes(include='number')
-    print(f"🧮 Detected numeric columns: {list(df.columns)}")
+    # ตรวจจับคอลัมน์ตัวเลข
+    numeric_cols = df.select_dtypes(include='number').columns.tolist()
+    print(f"🧮 Detected numeric columns: {numeric_cols}")
 
-    # สร้าง key และเก็บไว้
     pubkey, _ = generate_named_keys(key_name)
 
-    print("🔐 Encrypting dataset...")
-    enc_df = df.copy()
-    for col in enc_df.columns:
-        enc_df[col] = enc_df[col].apply(lambda x: pubkey.encrypt(x))
+    print("🔐 Encrypting numeric columns...")
+    df_encrypted = df.copy()
+    for col in numeric_cols:
+        df_encrypted[col] = df_encrypted[col].apply(lambda x: pubkey.encrypt(x))
 
-    # บันทึกไฟล์
+    # ✅ บันทึกเป็น DataFrame (ไม่ใช้ dict)
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    print(f"💾 Saving encrypted dataset to: {output_path}")
     with open(output_path, "wb") as f:
-        pickle.dump(enc_df, f)
+        pickle.dump(df_encrypted, f)
 
-    print("✅ Dataset encrypted and saved successfully.")
+    print(f"✅ Dataset encrypted and saved successfully to: {output_path}")
 
 
 def train_model(encrypted_path, output_model_path, key_name, feature_cols, label_col):
@@ -130,20 +127,27 @@ def decrypt_model(model_path, output_path, key_name):
         pickle.dump(model, f)
     print("✅ Decrypted model saved successfully.")
 
-def decrypt_dataset(encrypted_input_path, output_path, key_name):
-    print(f"📂 Loading encrypted dataset from: {encrypted_input_path}")
-    with open(encrypted_input_path, "rb") as f:
+def decrypt_dataset(input_path, output_path, key_name):
+    print(f"📂 Loading encrypted dataset from: {input_path}")
+    with open(input_path, "rb") as f:
         enc_df = pickle.load(f)
 
-    privkey = load_private_key(key_name)
+    if not isinstance(enc_df, pd.DataFrame):
+        raise ValueError("❌ Encrypted file does not contain a pandas DataFrame. Got: " + str(type(enc_df)))
+
+    privkey_path = os.path.join("keys", key_name, "private.key")
+    privkey = load_private_key(privkey_path)
 
     print("🔓 Decrypting dataset...")
-    dec_df = enc_df.applymap(lambda x: privkey.decrypt(x))
+
+    dec_df = enc_df.copy()
+    for col in dec_df.columns:
+        dec_df[col] = dec_df[col].apply(lambda x: privkey.decrypt(x) if hasattr(x, 'ciphertext') else x)
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    print(f"💾 Saving decrypted dataset to: {output_path}")
     dec_df.to_csv(output_path, index=False)
-    print("✅ Dataset decrypted and saved successfully.")
+    print(f"✅ Dataset decrypted and saved successfully to: {output_path}")
+
 
 
 def main():
