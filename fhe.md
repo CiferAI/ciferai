@@ -8,14 +8,16 @@ python -m cifer.securetrain encrypt-dataset \
 -decrypt-dataset
 python -m cifer.securetrain decrypt-dataset \
   --input datasets/encrypted_cifer_part1.pkl \
-  --output datasets/decrypted_cifer_part1.csv \
+  --output datasets/decrypted_cifer_part2.csv \
   --key alice
 
 2. เทรนโมเดล (train)
 python -m cifer.securetrain train \
   --encrypted-data datasets/encrypted_cifer_part1.pkl \
   --output-model models/encrypted_model_part1.pkl \
-  --key alice
+  --key alice \
+  --features step amount oldbalanceOrg newbalanceOrig oldbalanceDest newbalanceDest \
+  --label isFraud
 
 3. ถอดรหัสโมเดล (decrypt-model)
 python -m cifer.securetrain decrypt-model \

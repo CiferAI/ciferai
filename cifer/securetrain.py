@@ -31,7 +31,8 @@ def load_public_key(key_name):
     with open(path, "rb") as f:
         return pickle.load(f)
 
-def load_private_key(path):
+def load_private_key(key_name):
+    path = os.path.join("keys", key_name, "private.key")
     print(f"📂 Loading private key from: {path}")
     with open(path, "rb") as f:
         return pickle.load(f)
