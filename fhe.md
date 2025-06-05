@@ -79,3 +79,18 @@ python -m cifer.securetrain decrypt-keras-model \
   --input-model models/my_model_encrypted.h5 \
   --output-model models/my_model_decrypted.h5 \
   --key alice
+
+
+#จาก url 
+- huggingface
+python -m cifer.securetrain  encrypt-dataset \
+  --dataset "https://huggingface.co/datasets/CiferAI/cifer-fraud-detection-mini-dataset/resolve/main/fraud_detection.csv" \
+  --output encrypted/fraud_encrypted.pkl \
+  --key demo
+
+
+-github 
+python -m cifer.securetrain  encrypt-dataset \
+  --dataset "https://github.com/CiferAI/Cifer-Fraud-Detection-Mini-Dataset" \
+  --output encrypted/fraud_encrypted.pkl \
+  --key demo

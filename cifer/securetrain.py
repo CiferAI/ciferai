@@ -9,20 +9,75 @@ from phe import paillier
 from sklearn.linear_model import LogisticRegression
 from tensorflow.keras.models import load_model, save_model
 from tqdm import tqdm
+import subprocess
+import uuid
+
+def is_github_repo(url):
+    return url.startswith("https://github.com/") and not url.endswith(".csv")
+
+def clone_github_repo(url, suffix="repo"):
+    print(f"🐙 Cloning GitHub repo: {url}")
+    repo_id = str(uuid.uuid4())[:8]
+    target_dir = f"temp_download/github_{suffix}_{repo_id}"
+    try:
+        subprocess.run(["git", "clone", "--depth", "1", url, target_dir], check=True)
+    except subprocess.CalledProcessError:
+        raise RuntimeError("❌ Failed to clone GitHub repository.")
+    return target_dir
+
+
+def find_first_csv_file(directory):
+    print(f"🔍 Searching for CSV in: {directory}")
+    for root, _, files in os.walk(directory):
+        for file in files:
+            if file.endswith(".csv"):
+                csv_path = os.path.join(root, file)
+                print(f"✅ Found CSV: {csv_path}")
+                return csv_path
+    raise FileNotFoundError("❌ No CSV file found in the GitHub repository.")
+
+
+# def resolve_local_path(path_or_url, suffix="tmp"):
+#     """
+#     If path_or_url is a URL, download it and return the local temporary path.
+#     Otherwise, return the original path.
+#     """
+#     if path_or_url.startswith("http://") or path_or_url.startswith("https://"):
+#         print(f"🌐 Downloading from URL: {path_or_url}")
+#         response = requests.get(path_or_url, stream=True)
+#         total_size = int(response.headers.get('content-length', 0))
+
+#         os.makedirs("temp_download", exist_ok=True)
+#         filename = os.path.join("temp_download", f"{suffix}_{os.path.basename(path_or_url).split('?')[0]}")
+
+#         with open(filename, "wb") as f, tqdm(
+#             desc=f"⬇️  Saving to {filename}",
+#             total=total_size,
+#             unit='B',
+#             unit_scale=True,
+#             unit_divisor=1024,
+#         ) as bar:
+#             for chunk in response.iter_content(chunk_size=8192):
+#                 if chunk:
+#                     f.write(chunk)
+#                     bar.update(len(chunk))
+
+#         print(f"✅ Download completed: {filename}")
+#         return filename
+
+#     return path_or_url
 
 def resolve_local_path(path_or_url, suffix="tmp"):
-    """
-    If path_or_url is a URL, download it and return the local temporary path.
-    Otherwise, return the original path.
-    """
+    if is_github_repo(path_or_url):
+        cloned_dir = clone_github_repo(path_or_url, suffix=suffix)
+        return find_first_csv_file(cloned_dir)
+
     if path_or_url.startswith("http://") or path_or_url.startswith("https://"):
         print(f"🌐 Downloading from URL: {path_or_url}")
         response = requests.get(path_or_url, stream=True)
         total_size = int(response.headers.get('content-length', 0))
-
         os.makedirs("temp_download", exist_ok=True)
         filename = os.path.join("temp_download", f"{suffix}_{os.path.basename(path_or_url).split('?')[0]}")
-
         with open(filename, "wb") as f, tqdm(
             desc=f"⬇️  Saving to {filename}",
             total=total_size,
@@ -34,11 +89,11 @@ def resolve_local_path(path_or_url, suffix="tmp"):
                 if chunk:
                     f.write(chunk)
                     bar.update(len(chunk))
-
         print(f"✅ Download completed: {filename}")
         return filename
 
     return path_or_url
+
 
 
 
