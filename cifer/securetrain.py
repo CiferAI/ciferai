@@ -8,6 +8,46 @@ from io import BytesIO
 from phe import paillier
 from sklearn.linear_model import LogisticRegression
 from tensorflow.keras.models import load_model, save_model
+from tqdm import tqdm
+
+def resolve_local_path(path_or_url, suffix="tmp"):
+    """
+    If path_or_url is a URL, download it and return the local temporary path.
+    Otherwise, return the original path.
+    """
+    if path_or_url.startswith("http://") or path_or_url.startswith("https://"):
+        print(f"🌐 Downloading from URL: {path_or_url}")
+        response = requests.get(path_or_url, stream=True)
+        total_size = int(response.headers.get('content-length', 0))
+
+        os.makedirs("temp_download", exist_ok=True)
+        filename = os.path.join("temp_download", f"{suffix}_{os.path.basename(path_or_url).split('?')[0]}")
+
+        with open(filename, "wb") as f, tqdm(
+            desc=f"⬇️  Saving to {filename}",
+            total=total_size,
+            unit='B',
+            unit_scale=True,
+            unit_divisor=1024,
+        ) as bar:
+            for chunk in response.iter_content(chunk_size=8192):
+                if chunk:
+                    f.write(chunk)
+                    bar.update(len(chunk))
+
+        print(f"✅ Download completed: {filename}")
+        return filename
+
+    return path_or_url
+
+
+
+def cleanup_temp_files():
+    """Remove temp_download folder if exists"""
+    import shutil
+    if os.path.exists("temp_download"):
+        shutil.rmtree("temp_download")
+
 
 def get_key_paths(key_name):
     pub_path = f"keys/{key_name}/public.key"
@@ -274,25 +314,59 @@ def main():
     keras_dec.add_argument("--key", required=True)
 
     args = parser.parse_args()
+    # if args.command == "encrypt-dataset":
+    #     encrypt_dataset(args.dataset, args.output, args.key)
+    # elif args.command == "decrypt-dataset":
+    #     decrypt_dataset(args.input, args.output, args.key)  # ✅ เพิ่มตรงนี้
+    # elif args.command == "encrypt-model":
+    #     encrypt_model(args.input_model, args.output_model, args.key)
+    # elif args.command == "train":
+    #     train_model(
+    #         args.encrypted_data,
+    #         args.output_model,
+    #         args.key,
+    #         args.features,
+    #         args.label)
+    # elif args.command == "decrypt-model":
+    #     decrypt_model(args.input_model, args.output_model, args.key)
+    # elif args.command == "encrypt-keras-model":
+    #     encrypt_keras_model(args.input_model, args.output_model, args.key)
+    # elif args.command == "decrypt-keras-model":
+    #     decrypt_keras_model(args.input_model, args.output_model, args.key)
     if args.command == "encrypt-dataset":
-        encrypt_dataset(args.dataset, args.output, args.key)
+        dataset_path = resolve_local_path(args.dataset, suffix="dataset")
+        encrypt_dataset(dataset_path, args.output, args.key)
+        cleanup_temp_files()
+
     elif args.command == "decrypt-dataset":
-        decrypt_dataset(args.input, args.output, args.key)  # ✅ เพิ่มตรงนี้
+        input_path = resolve_local_path(args.input, suffix="encdata")
+        decrypt_dataset(input_path, args.output, args.key)
+        cleanup_temp_files()
+
     elif args.command == "encrypt-model":
-        encrypt_model(args.input_model, args.output_model, args.key)
-    elif args.command == "train":
-        train_model(
-            args.encrypted_data,
-            args.output_model,
-            args.key,
-            args.features,
-            args.label)
+        input_path = resolve_local_path(args.input_model, suffix="model")
+        encrypt_model(input_path, args.output_model, args.key)
+        cleanup_temp_files()
+
     elif args.command == "decrypt-model":
-        decrypt_model(args.input_model, args.output_model, args.key)
+        input_path = resolve_local_path(args.input_model, suffix="model")
+        decrypt_model(input_path, args.output_model, args.key)
+        cleanup_temp_files()
+
     elif args.command == "encrypt-keras-model":
-        encrypt_keras_model(args.input_model, args.output_model, args.key)
+        input_path = resolve_local_path(args.input_model, suffix="keras")
+        encrypt_keras_model(input_path, args.output_model, args.key)
+        cleanup_temp_files()
+
     elif args.command == "decrypt-keras-model":
-        decrypt_keras_model(args.input_model, args.output_model, args.key)
+        input_path = resolve_local_path(args.input_model, suffix="keras")
+        decrypt_keras_model(input_path, args.output_model, args.key)
+        cleanup_temp_files()
+
+    elif args.command == "train":
+        encrypted_path = resolve_local_path(args.encrypted_data, suffix="train")
+        train_model(encrypted_path, args.output_model, args.key, args.features, args.label)
+        cleanup_temp_files()
     else:
         parser.print_help()
 
