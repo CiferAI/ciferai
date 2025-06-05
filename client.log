@@ -61,3 +61,5 @@
 2025-06-01 19:14:16,377 - 127.0.0.1 - - [01/Jun/2025 19:14:16] "POST /run_notebook HTTP/1.1" 200 -
 2025-06-01 19:14:22,059 - Upload success. Accuracy: 0.9999099969863892
 2025-06-01 19:14:24,682 - 127.0.0.1 - - [01/Jun/2025 19:14:24] "POST /run_notebook HTTP/1.1" 200 -
+2025-06-05 14:17:30,430 - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-06-05 14:17:30,431 - Error in loading the saved optimizer state. As a result, your model is starting with a freshly initialized optimizer.

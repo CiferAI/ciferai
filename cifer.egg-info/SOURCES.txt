@@ -8,6 +8,7 @@ cifer/cli.py
 cifer/client.py
 cifer/config.py
 cifer/connection_handler.py
+cifer/save_keras_model.py
 cifer/securetrain.py
 cifer/server.py
 cifer/training.py

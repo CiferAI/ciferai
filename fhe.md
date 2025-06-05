@@ -68,11 +68,9 @@ python -m cifer.securetrain train \
   --output-model models/mixed_dummy_data_decrypt.pkl \
   --key alice
 
-
-
 # Encrypt
 python -m cifer.securetrain encrypt-keras-model \
-  --input-model models/my_model.h5 \
+  --input-model models/cifer-fraud-detection-mini-model.h5 \
   --output-model models/my_model_encrypted.h5 \
   --key alice
 
