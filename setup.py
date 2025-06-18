@@ -1,5 +1,17 @@
 from setuptools import setup, find_packages
 import os
+from setuptools.command.install import install
+
+class PostInstallCommand(install):
+    """Post-installation for kernel registration"""
+    def run(self):
+        install.run(self)
+        try:
+            from cifer.post_install import register_kernel
+            register_kernel.register_kernel()
+        except Exception as e:
+            print(f"⚠️ Failed to auto register kernel: {e}")
+
 
 def read_file(filename):
     if os.path.exists(filename):
@@ -9,7 +21,7 @@ def read_file(filename):
 
 setup(
     name="cifer",
-    version="1.0.17",
+    version="1.0.21",
     author="Cifer.ai",
     author_email="support@cifer.ai",
     description="Federated Learning and Fully Homomorphic Encryption",
@@ -65,6 +77,15 @@ setup(
         "scikit-learn",
         "joblib",
         "phe",
+        "librosa",             #  Audio, Speech
+        "opencv-python",       #  Video
+        "dgl",                 #  Graph
+        "geopandas",           #  Geospatial
+        "open3d",              #  3D/PointCloud
+        "pydicom",             #  Biomedical (DICOM files)
+        "torchaudio",          #  Music/Speech
+        "transformers",       #  NLP
+        "torch-geometric",  
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
